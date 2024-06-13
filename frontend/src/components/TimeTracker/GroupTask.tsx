@@ -48,7 +48,7 @@ const GroupTask = ({ status }: GroupTypes) => {
                                 primary="Task Project"
                             />
                             <ListItemText
-                                primary="00:00:00"
+                                primary="10:00:00"
                             />
 
                         </ListItem>
