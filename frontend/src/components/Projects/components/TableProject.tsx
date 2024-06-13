@@ -1,4 +1,4 @@
-import type { IProjectResponse } from "../../../types/ProjectsType";
+import type { IProjectResponse } from "types.d.ts";
 
 
 

@@ -1,6 +1,6 @@
 import { Box, Button, Modal, Typography } from '@mui/material';
 import { style } from '../styles/styles';
-import { IProjectResponse } from '../../../types/ProjectsType';
+import type { IProjectResponse } from 'types.d.ts';
 
 interface Props {
   showModal: boolean;

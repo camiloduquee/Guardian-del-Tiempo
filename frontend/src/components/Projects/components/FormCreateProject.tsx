@@ -2,7 +2,7 @@ import { Box, Modal, Typography } from '@mui/material';
 import { style } from '../styles/styles';
 import { ProjectService } from '../../../service/ProjectService';
 import { useForm } from 'react-hook-form';
-import { ICreateProject } from '../../../types/ProjectsType';
+import type { ICreateProject } from 'types.d.ts';
 
 export const FormCreateProject = ({
   open,
