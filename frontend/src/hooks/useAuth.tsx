@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { registerRequest, loginRequest } from "../api/auth";
-import { FormLogin, FRWithoutConfirm, useRequestType } from "../types";
+import type { FormLogin, FRWithoutConfirm, useRequestType } from "types";
 import { toast } from 'react-toastify';
 import { useAuthUser } from "../context/auth-context";
 

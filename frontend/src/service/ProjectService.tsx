@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { IClient, ICreateProject, IProjectResponse } from '../types/ProjectsType';
+import type { IClient, ICreateProject, IProjectResponse } from 'types';
 import { SubmitHandler } from 'react-hook-form';
 
 export const ProjectService = () => {

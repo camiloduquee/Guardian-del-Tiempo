@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ProjectService } from "../service/ProjectService";
-import { IProjectResponse } from "../types/ProjectsType";
+import type { IProjectResponse } from "types";
 
 export const useSearchProject = () => {
   const [searchTerm, setSearchTerm] = useState('');
