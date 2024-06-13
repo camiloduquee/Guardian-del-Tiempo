@@ -6,7 +6,7 @@ import {
   ModalShowProject,
   TableProject,
 } from './components/index.ts';
-import type { IProjectResponse, IShowProject } from '../../types/ProjectsType';
+import type { IProjectResponse, IShowProject } from 'types.d.ts';
 import { useSearchProject } from '../../hooks/useSearchProject';
 
 export const Project = () => {
