@@ -1,10 +1,13 @@
 import fs from 'fs'
+import path from 'path' 
 import swaggerUi from 'swagger-ui-express'
 import yaml from 'yaml'
 import { Request, Response } from '../utils/types'
 import { type Router } from 'express'
 
-const file = fs.readFileSync('./src/docs/swagger.yaml', 'utf8')
+const filePath = path.resolve(__dirname, '../docs/swagger.yaml')
+
+const file = fs.readFileSync(filePath, 'utf8')
 const swaggerYaml = yaml.parse(file)
 
 export const swaggerDocs = (app: Router, port: number) => {
@@ -14,5 +17,5 @@ export const swaggerDocs = (app: Router, port: number) => {
     res.send(swaggerYaml)
   })
 
-  console.log(`📄 Docs available at http://localhost:${port}/api/docs`)
+  console.log(`📄 Docs available at https://guardiandeltiempo-server.vercel.app:${port}/api/docs`)
 }

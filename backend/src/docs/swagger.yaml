@@ -14,7 +14,7 @@ info:
     - [![Deploy](https://vercel.com/button)]()
 
 servers:
-  - url: http://localhost:3000/api/v1
+  - url: https://guardiandeltiempo-server.vercel.app/api/v1
     description: Development server
 
 tags:
