@@ -1,4 +1,35 @@
+# Node modules
 node_modules
-.vercel
-.lh
-.editorconfig
+
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+
+# Build output
+dist
+build
+
+# IDEs and Editors
+.vscode/
+.idea/
+.DS_Store
+*.swp
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# Mac system files
+.DS_Store
