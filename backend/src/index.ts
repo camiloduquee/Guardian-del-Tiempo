@@ -18,11 +18,18 @@
 
 // main().catch((err) => console.error('Error in main function:', err))
 
-import express from 'express';
+const express = require('express');
+
 const app = express();
 
-app.get("/", (_:any, res:any) => res.send("Express on Vercel"));
+// Ruta básica para verificar el funcionamiento del backend
+app.get('/', (_:any, res:any) => {
+  res.send('El backend está funcionando correctamente y puede procesar solicitudes.');
+});
 
-app.listen(3000, () => console.log("Server ready on port 3000."));
+app.listen(3000, () => {
+    console.log(`\n🚀 Server running on port ${3000}\n`);
+   
+  });
 
-export default app;
+module.exports = app;
