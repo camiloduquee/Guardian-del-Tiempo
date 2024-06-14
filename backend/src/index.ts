@@ -8,7 +8,7 @@ async function main() {
     await sequelize.authenticate()
     console.log('Successful connection to the database')
     app.listen(PORT, () => {
-      console.log(`\n🚀 Server running on port ${PORT}\n`)
+      console.log(`\n Server running on port ${PORT}\n`)
       swaggerDocs(app, PORT)
     })
   } catch (error) {
