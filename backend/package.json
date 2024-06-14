@@ -8,8 +8,7 @@
     "dev": "nodemon --watch src --ext ts,yaml --exec pnpx ts-node src/index.ts",
     "lint": "ts-standard --project ./tsconfig.json",
     "fixlint": "pnpm exec ts-standard --fix",
-    "start": "node src/index.js" 
-     
+    "start": "node src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -25,7 +24,7 @@
     "moment": "^2.30.1",
     "morgan": "^1.10.0",
     "nodemailer": "6.9.13",
-    "pg": "^8.11.5",
+    "pg": "^8.12.0",
     "sequelize": "6.37.3",
     "serve-favicon": "2.5.0",
     "swagger-jsdoc": "6.2.8",

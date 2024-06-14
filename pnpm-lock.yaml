@@ -45,7 +45,7 @@ importers:
         specifier: 6.9.13
         version: 6.9.13
       pg:
-        specifier: ^8.11.5
+        specifier: ^8.12.0
         version: 8.12.0
       sequelize:
         specifier: 6.37.3
