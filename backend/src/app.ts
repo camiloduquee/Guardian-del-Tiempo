@@ -1,5 +1,5 @@
 import cors from 'cors'
-import express , { Request, Response, NextFunction } from 'express'
+import express, { Request, Response, NextFunction } from 'express'
 import morgan from 'morgan'
 import { router } from './routes'
 import { isApiKey } from './middlewares/apiKey.middleware'
@@ -28,4 +28,4 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction): void => {
   console.error('Unhandled error:', err)
   res.status(500).send('Something broke!')
 })
- export default app
+export default app
