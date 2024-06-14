@@ -1,5 +1,5 @@
 // import cors from 'cors'
-// import express, { Request, Response, NextFunction } from 'express'
+// import express , { Request, Response, NextFunction } from 'express'
 // import morgan from 'morgan'
 // import { router } from './routes'
 // import { isApiKey } from './middlewares/apiKey.middleware'
@@ -30,13 +30,13 @@
 // })
 
 // export default app
-import express from 'express';
 
-const app = express();
 
-// Ruta básica para verificar el funcionamiento del backend
-app.get('/', (_, res) => {
-  res.send('El backend está funcionando correctamente y puede procesar solicitudes.');
-});
+// import express from 'express';
+// const app = express();
 
-export default app;
+// app.get("/", (_:any, res:any) => res.send("Express on Vercel"));
+
+// app.listen(3000, () => console.log("Server ready on port 3000."));
+
+// export default app;
