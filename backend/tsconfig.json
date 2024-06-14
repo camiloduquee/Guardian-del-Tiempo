@@ -111,20 +111,20 @@
 
 {
   "compilerOptions": {
-    "target": "ES2020",                     // Versión de ECMAScript para compilar (ajustar según compatibilidad)
-    "module": "commonjs",                   // Sistema de módulos a utilizar (commonjs para Node.js)
-    "strict": true,                         // Habilitar todas las opciones estrictas de TypeScript
-    "esModuleInterop": true,                // Habilitar interoperabilidad entre módulos ES6 y CommonJS
-    "skipLibCheck": true,                   // Omitir la comprobación de librerías de definiciones de tipo
-    "forceConsistentCasingInFileNames": true,// Forzar consistencia de mayúsculas/minúsculas en nombres de archivos
-    "outDir": "./dist",                     // Directorio de salida para archivos compilados
-    "rootDir": "./src",                     // Directorio raíz de archivos TypeScript
-    "resolveJsonModule": true,              // Habilitar la resolución de módulos JSON
-    "baseUrl": "./",                        // Ruta base para la resolución de módulos
+    "target": "ES2020",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "resolveJsonModule": true,
+    "baseUrl": "./",
     "paths": {
-      "*": ["node_modules/*", "src/types/*"] // Configuración de rutas de resolución de módulos
+      "*": ["node_modules/*", "src/types/*"]
     }
   },
-  "include": ["src/**/*.ts"],               // Archivos TypeScript a incluir en la compilación
-  "exclude": ["node_modules", "dist"]       // Archivos/directorios a excluir de la compilación
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }
