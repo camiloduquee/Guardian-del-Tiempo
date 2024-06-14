@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",  // Establece la base de las rutas como el directorio src
+      "paths": {
+        "@types/*": ["types/*"],  // Define un alias @types para la carpeta types
+        "@components/*": ["components/*"],  // Alias para la carpeta components
+        "@hooks/*": ["hooks/*"],  // Alias para la carpeta hooks
+        "@routes/*": ["routes/*"],  // Alias para la carpeta routes
+        "@utils/*": ["utils/*"]  // Alias para la carpeta utils
+       },
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
