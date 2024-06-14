@@ -9,7 +9,8 @@ export const sequelize = new Sequelize(
     {
       host: DATABASE_CONFIG.host,
       port: Number(DATABASE_CONFIG.port),
-      dialect: DATABASE_CONFIG.dialect,
+      dialect: 'postgres',
+      dialectModulePath: require('pg'),
       
     }
   );
