@@ -87,6 +87,9 @@ importers:
       '@types/morgan':
         specifier: 1.9.9
         version: 1.9.9
+      '@types/node':
+        specifier: ^20.14.2
+        version: 20.14.2
       '@types/nodemailer':
         specifier: ^6.4.15
         version: 6.4.15
