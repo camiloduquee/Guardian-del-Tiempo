@@ -2,14 +2,14 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.ts",
+  "main": "src/index.ts",
   "scripts": {
     "build": "tsc",
     "dev": "nodemon --watch src --ext ts,yaml --exec pnpx ts-node src/index.ts",
     "lint": "ts-standard --project ./tsconfig.json",
     "fixlint": "pnpm exec ts-standard --fix",
-    "start": "node dist/index.js",  
-    "prestart": "npm run build"  
+    "start": "node src/index.js" 
+     
   },
   "keywords": [],
   "author": "",
