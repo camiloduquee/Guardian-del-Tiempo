@@ -1,6 +1,7 @@
 import { Sequelize } from 'sequelize'
 import { DATABASE_URL, DATABASE_CONFIG } from '../utils/config'
 // import { PostgresDialect } from '@sequelize/postgres';
+import pg from "pg"
 
 export const sequelize = new Sequelize(
     DATABASE_CONFIG.database,
@@ -10,7 +11,7 @@ export const sequelize = new Sequelize(
       host: DATABASE_CONFIG.host,
       port: Number(DATABASE_CONFIG.port),
       dialect: 'postgres',
-      dialectModulePath: require('pg'),
+      dialectOptions: pg
       
     }
   );
