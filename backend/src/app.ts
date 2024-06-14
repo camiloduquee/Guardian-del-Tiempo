@@ -17,7 +17,7 @@ app.disable('x-powered-by')
 
 // Routes
 app.get('/', (_, res) => {
-  res.send('Hello World!')
+  res.send('---Server OK !')
 })
 
 const routesWithoutApiKey = ['/api/v1/docs', '/api/docs', '/']
