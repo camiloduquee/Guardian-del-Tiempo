@@ -8,11 +8,6 @@
         "includeFiles": ["src/**/*.ts"]
       }
     }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/src/index.ts"
-    }
   ]
+
 }
