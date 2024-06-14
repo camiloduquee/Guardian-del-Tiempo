@@ -5,12 +5,8 @@ import { router } from './routes'
 import { isApiKey } from './middlewares/apiKey.middleware'
 import { excludeRoutes } from './utils/helpers'
 import cookieParser from 'cookie-parser'
+import { corsOptions } from './utils/config'
 const app = express()
-
-const corsOptions = {
-  origin: 'http://localhost:5173', 
-  credentials: true, 
-};
 
 // Middlewares
 app.use(express.json())
