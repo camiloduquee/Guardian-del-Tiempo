@@ -15,7 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "@formkit/tempo": "^0.1.1",
-    "@types/pg": "^8.11.6",
+    "@sequelize/postgres": "7.0.0-alpha.41",
     "bcrypt": "5.1.1",
     "cookie-parser": "^1.4.6",
     "cors": "2.8.5",
@@ -44,6 +44,7 @@
     "@types/morgan": "1.9.9",
     "@types/node": "^20.14.2",
     "@types/nodemailer": "^6.4.15",
+    "@types/pg": "^8.11.6",
     "@types/sequelize": "^4.28.20",
     "@types/serve-favicon": "2.5.7",
     "@types/swagger-jsdoc": "6.0.4",
