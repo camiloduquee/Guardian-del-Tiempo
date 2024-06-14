@@ -117,8 +117,8 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist",
-    "rootDir": "./src",
+    "outDir": "./dist",  // Directorio de salida para archivos compilados
+    "rootDir": "./src",  // Directorio raíz del código fuente
     "resolveJsonModule": true,
     "baseUrl": "./",
     "paths": {
