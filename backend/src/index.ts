@@ -18,7 +18,7 @@
 
 // main().catch((err) => console.error('Error in main function:', err))
 
-const express = require('express');
+import express from 'express';
 
 const app = express();
 
@@ -27,4 +27,8 @@ app.get('/', (_:any, res:any) => {
   res.send('El backend está funcionando correctamente y puede procesar solicitudes.');
 });
 
-module.exports = app;
+app.listen(3000, () => {
+  console.log(`\n🚀 Server running on port 3000\n`);
+  
+});
+
