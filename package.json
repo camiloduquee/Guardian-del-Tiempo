@@ -1,14 +1,18 @@
 {
-  "name": "s15-28-m-node-react",
+  "name": "guardian-del-tiempo",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "aplicacion para la gestión del tiempo de los freelancer",
   "scripts": {
-    "dev": "pnpm --filter \"**\" dev",
-    "build": "pnpm --filter \"**\" build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev":"concurrently --prefix \"[{name}]\" --prefix-colors \"bgBlue.bold,bgGreen.bold\" --names \"FRONTEND,BACKEND\" \"pnpm run dev:frontend\" \"pnpm run dev:backend\"",
+    "dev:frontend": "cd frontend && pnpm run dev ",
+    "dev:backend": " cd backend && pnpm run dev ",
+    "frontend": " cls && pnpm run dev:frontend",
+    "backend": " cls && pnpm run dev:backend"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "Group No-Country s15-28-m-node-react",
+  "license": "MIT License",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
 }
