@@ -47,9 +47,12 @@ importers:
       pg:
         specifier: ^8.12.0
         version: 8.12.0
+      pg-hstore:
+        specifier: ^2.3.4
+        version: 2.3.4
       sequelize:
         specifier: 6.37.3
-        version: 6.37.3(pg@8.12.0)
+        version: 6.37.3(pg-hstore@2.3.4)(pg@8.12.0)
       serve-favicon:
         specifier: 2.5.0
         version: 2.5.0
@@ -2632,6 +2635,10 @@ packages:
   pg-connection-string@2.6.4:
     resolution: {integrity: sha512-v+Z7W/0EO707aNMaAEfiGnGL9sxxumwLl2fJvCQtMn9Fxsg+lPpPkdcyBSv/KFgpGdYkMfn+EI1Or2EHjpgLCA==}
 
+  pg-hstore@2.3.4:
+    resolution: {integrity: sha512-N3SGs/Rf+xA1M2/n0JBiXFDVMzdekwLZLAO0g7mpDY9ouX+fDI7jS6kTq3JujmYbtNSJ53TJ0q4G98KVZSM4EA==}
+    engines: {node: '>= 0.8.x'}
+
   pg-int8@1.0.1:
     resolution: {integrity: sha512-WCtabS6t3c8SkpDBUlb1kjOs7l66xsGdKpIPZsg4wR+B3+u9UAum2odSsF9tnvxg80h4ZxLWMy4pRjOsFIqQpw==}
     engines: {node: '>=4.0.0'}
@@ -3292,6 +3299,9 @@ packages:
 
   undefsafe@2.0.5:
     resolution: {integrity: sha512-WxONCrssBM8TSPRqN5EmsjVrsv4A8X12J4ArBiiayv3DyyG3ZlIg6yysuuSYdZsVz3TKcTg2fd//Ujd4CHV1iA==}
+
+  underscore@1.13.6:
+    resolution: {integrity: sha512-+A5Sja4HP1M08MaXya7p5LvjuM7K6q/2EaC0+iovj/wOcMsTzMvDFbasi/oSapiwOlt252IqsKqPjCl7huKS0A==}
 
   undici-types@5.26.5:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
@@ -6094,6 +6104,10 @@ snapshots:
 
   pg-connection-string@2.6.4: {}
 
+  pg-hstore@2.3.4:
+    dependencies:
+      underscore: 1.13.6
+
   pg-int8@1.0.1: {}
 
   pg-pool@3.6.2(pg@8.12.0):
@@ -6431,7 +6445,7 @@ snapshots:
 
   sequelize-pool@7.1.0: {}
 
-  sequelize@6.37.3(pg@8.12.0):
+  sequelize@6.37.3(pg-hstore@2.3.4)(pg@8.12.0):
     dependencies:
       '@types/debug': 4.1.12
       '@types/validator': 13.11.10
@@ -6451,6 +6465,7 @@ snapshots:
       wkx: 0.5.0
     optionalDependencies:
       pg: 8.12.0
+      pg-hstore: 2.3.4
     transitivePeerDependencies:
       - supports-color
 
@@ -6851,6 +6866,8 @@ snapshots:
       which-boxed-primitive: 1.0.2
 
   undefsafe@2.0.5: {}
+
+  underscore@1.13.6: {}
 
   undici-types@5.26.5: {}
 

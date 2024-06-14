@@ -10,4 +10,17 @@ at Module.load (node:internal/modules/cjs/loader:1208:32)
 at Function.Module._load (node:internal/modules/cjs/loader:1024:12)
 at /opt/rust/nodejs.js:1:11503
 Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
-INIT_REPORT Init Duration: 794.98 ms	Phase: invoke	Status: error	Error Type: Runtime.ExitError
+INIT_REPORT Init Duration: 594.94 ms	Phase: init	Status: error	Error Type: Runtime.ExitError
+Error: Please install pg package manually
+at ConnectionManager._loadDialectModule (/var/task/node_modules/.pnpm/sequelize@6.37.3_pg@8.12.0/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:55:15)
+at new ConnectionManager (/var/task/node_modules/.pnpm/sequelize@6.37.3_pg@8.12.0/node_modules/sequelize/lib/dialects/postgres/connection-manager.js:15:24)
+at new PostgresDialect (/var/task/node_modules/.pnpm/sequelize@6.37.3_pg@8.12.0/node_modules/sequelize/lib/dialects/postgres/index.js:13:30)
+at new Sequelize (/var/task/node_modules/.pnpm/sequelize@6.37.3_pg@8.12.0/node_modules/sequelize/lib/sequelize.js:194:20)
+at Object.<anonymous> (/vercel/path0/backend/src/database/database.ts:4:26)
+at Module._compile (node:internal/modules/cjs/loader:1358:14)
+at Object.Module._extensions..js (node:internal/modules/cjs/loader:1416:10)
+at Module.load (node:internal/modules/cjs/loader:1208:32)
+at Function.Module._load (node:internal/modules/cjs/loader:1024:12)
+at /opt/rust/nodejs.js:1:11503
+Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+INIT_REPORT Init Duration: 868.74 ms	Phase: invoke	Status: error	Error Type: Runtime.ExitError
