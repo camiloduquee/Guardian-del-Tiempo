@@ -1,6 +1,7 @@
 import fs from 'fs'
 import path from 'path' 
 import swaggerUi from 'swagger-ui-express'
+import swaggerJsDoc from "swagger-jsdoc";
 import YAML  from 'yaml'
 import { Request, Response } from '../utils/types'
 import { type Router } from 'express'
@@ -17,7 +18,33 @@ if (!fs.existsSync(filePath)) {
 }
 
 const file = fs.readFileSync(filePath, 'utf8')
-const swaggerYaml = YAML.parse(file)
+// const swaggerYaml = YAML.parse(file)
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Library API",
+      version: "1.0.0",
+      description: "A simple Express Library API",
+      termsOfService: "http://example.com/terms/",
+      contact: {
+        name: "API Support",
+        url: "http://www.exmaple.com/support",
+        email: "support@example.com",
+      },
+    },
+    servers: [
+      {
+        url: "https://guardiandeltiempo-server.vercel.app/",
+        description: "My API Documentation",
+      },
+    ],
+  },
+  // This is to call all the file
+  apis: ["src/**/*.js"],
+};
+
+const swaggerYaml = swaggerJsDoc(options);
 
 export const swaggerDocs = (app: Router ) => {
   app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerYaml, {customCss:CSS_URL}))
@@ -28,3 +55,11 @@ export const swaggerDocs = (app: Router ) => {
 
   console.log(`📄 Docs available at https://guardiandeltiempo-server.vercel.app/api/docs`)
 }
+
+
+
+// app.use(
+//   "/api/v1/docs",
+//   swaggerUI.serve,
+//   swaggerUI.setup(specs, { customCssUrl: CSS_URL })
+// );
