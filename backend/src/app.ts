@@ -20,7 +20,7 @@ const app = express()
 
 // Middlewares
 app.use(express.json())
-app.use(cors())
+app.use(cors(corsOptions))
 app.use(morgan('dev'))
 app.use(cookieParser())
 app.disable('x-powered-by')
