@@ -10,8 +10,10 @@ info:
     - Operaciones de autenticación, para el acceso de usuarios y de la consulta.
 
     Algunos links de interés:
-    - [![](https://img.shields.io/badge/Repositorio-76908e?logo=github)](https://github.com/No-Country/s15-28-m-node-react)
-    - [![Deploy](https://vercel.com/button)]()
+    - [![](https://img.shields.io/badge/Repositorio-76908e?logo=github)](https://github.com/camiloduquee/Guardian-del-Tiempo)
+    
+    - [![](https://vercel.com/button)](https://guardiandel-tiempo.vercel.app/)
+   
 
 servers:
   - url: https://guardiandeltiempo-server.vercel.app/
