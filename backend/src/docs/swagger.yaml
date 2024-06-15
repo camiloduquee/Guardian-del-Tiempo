@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: s15-28-m-node-react
+  title: Guardian del Tiempo
   version: 1.0.0
   description: |-
     Guardianes del Tiempo Freelance es una plataforma innovadora diseñada para optimizar la gestión de proyectos y tareas de freelancers. Con Guardianes del Tiempo Freelance, los profesionales independientes pueden manejar eficientemente múltiples proyectos simultáneamente, lo que les permite maximizar su productividad y aumentar sus ingresos.
