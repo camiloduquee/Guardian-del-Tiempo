@@ -22,7 +22,7 @@ const file = fs.readFileSync(filePath, 'utf8')
 const swaggerYaml = YAML.parse(file);
 
 export const swaggerDocs = (app: Router) => {
-  app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerYaml, { customCss: CSS_URL }))
+  app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerYaml, { customCssUrl: CSS_URL }))
   app.get('/api/docs.json', (_req: Request, res: Response) => {
     res.setHeader('Content-Type', 'application/json')
     res.send(swaggerYaml)
