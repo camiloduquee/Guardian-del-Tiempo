@@ -21,8 +21,8 @@ app.get('/', (_, res) => {
   res.send('---Server OK !')
 })
 
-const routesWithoutApiKey = ['/api/v1/docs', '/api/docs', '/']
-app.use(excludeRoutes(routesWithoutApiKey, isApiKey))
+// const routesWithoutApiKey = ['/api/v1/docs', '/api/docs', '/']
+// app.use(excludeRoutes(routesWithoutApiKey, isApiKey))
 app.use(router)
 
 app.use((err: any, _req: Request, res: Response, _next: NextFunction): void => {
