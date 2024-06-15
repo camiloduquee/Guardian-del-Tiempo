@@ -22,6 +22,20 @@ const file = fs.readFileSync(filePath, 'utf8')
 
 export const rutaFile = () => { return filePath }
 
+
+
+const swaggerYaml = YAML.parse(file);
+
+export const swaggerDocs = (app: Router) => {
+  app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerYaml, { customCss: CSS_URL }))
+  app.get('/api/docs.json', (_req: Request, res: Response) => {
+    res.setHeader('Content-Type', 'application/json')
+    res.send(swaggerYaml)
+  })
+
+  console.log(`📄 Docs available at https://guardiandeltiempo-server.vercel.app/api/docs`)
+}
+
 // const swaggerYaml = YAML.parse(file)
 // const options = {
 //   definition: {
@@ -47,20 +61,6 @@ export const rutaFile = () => { return filePath }
 //   // This is to call all the file
 //   apis: ["src/**/*.js"],
 // };
-
-const swaggerYaml = YAML.parse(file);
-
-export const swaggerDocs = (app: Router) => {
-  app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerYaml, { customCss: CSS_URL }))
-  app.get('/api/docs.json', (_req: Request, res: Response) => {
-    res.setHeader('Content-Type', 'application/json')
-    res.send(swaggerYaml)
-  })
-
-  console.log(`📄 Docs available at https://guardiandeltiempo-server.vercel.app/api/docs`)
-}
-
-
 
 // app.use(
 //   "/api/v1/docs",
