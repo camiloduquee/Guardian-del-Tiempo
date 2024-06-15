@@ -61,7 +61,7 @@ const specs = swaggerJsDoc(options);
 app.use(
   "/api/v1/docs",
   swaggerUI.serve,
-  swaggerUI.setup(specs, { customCssUrl: CSS_URL })
+  swaggerUI.setup(specs)
 );
 
 const routesWithoutApiKey = ['/api/v1/docs', '/api/docs', '/']
