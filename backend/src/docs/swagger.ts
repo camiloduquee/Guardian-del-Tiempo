@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path' 
 import swaggerUi from 'swagger-ui-express'
-import yaml from 'yaml'
+import YAML  from 'yaml'
 import { Request, Response } from '../utils/types'
 import { type Router } from 'express'
 
@@ -10,11 +10,11 @@ const filePath = path.resolve(__dirname, '../docs/swagger.yaml')
 if (!fs.existsSync(filePath)) {
   console.log(`El archivo no funciona: ${filePath}`);
 } else {
-  console.log(`Swagger ruta del archivo: ${filePath}`);
+  console.error(`Swagger ruta del archivo: ${filePath}`);
 }
 
 const file = fs.readFileSync(filePath, 'utf8')
-const swaggerYaml = yaml.parse(file)
+const swaggerYaml = YAML.parse(file)
 
 export const swaggerDocs = (app: Router, port: number) => {
   app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerYaml))
