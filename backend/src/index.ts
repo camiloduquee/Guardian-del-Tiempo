@@ -30,7 +30,6 @@ async function main() {
     await validateConnection()
     app.listen(PORT, () => {
       console.log(`\n Server running on port ${PORT}\n`)
-      // swaggerDocs(app)
     })
   } catch (error) {
     console.log(`Unable to connect to the database: ${error}`)

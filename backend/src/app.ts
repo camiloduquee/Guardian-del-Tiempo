@@ -6,19 +6,13 @@ import { isApiKey } from './middlewares/apiKey.middleware'
 import { excludeRoutes } from './utils/helpers'
 import cookieParser from 'cookie-parser'
 import { corsOptions } from './utils/config'
-import { rutaFile,swaggerDocs } from './docs/swagger'
-
-
-
-// CDN CSS
-
-
+import { swaggerDocs } from './docs/swagger'
 
 const app = express()
 
 // Middlewares
 app.use(express.json())
-app.use(cors())
+app.use(cors(corsOptions))
 app.use(morgan('dev'))
 app.use(cookieParser())
 app.disable('x-powered-by')
@@ -27,15 +21,11 @@ app.disable('x-powered-by')
 app.get('/', (_, res) => {
   res.send('---Server OK !')
 })
-
-app.get('/rutaFile', (_, res) => {
-  res.send(rutaFile())
-})
-
+// Swagger app documentación
 swaggerDocs(app)
 
-// const routesWithoutApiKey = ['/api/v1/docs', '/api/docs', '/']
-// app.use(excludeRoutes(routesWithoutApiKey, isApiKey))
+const routesWithoutApiKey = ['/api/v1/docs', '/api/docs', '/']
+app.use(excludeRoutes(routesWithoutApiKey, isApiKey))
 app.use(router)
 
 app.use((err: any, _req: Request, res: Response, _next: NextFunction): void => {
