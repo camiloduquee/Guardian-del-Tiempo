@@ -5,7 +5,7 @@ import YAML from 'yaml'
 import { Request, Response } from '../utils/types'
 import { type Router } from 'express'
 
-
+// CDN ----
 const CSS_URL =
   "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.6.2/swagger-ui.min.css";
 
