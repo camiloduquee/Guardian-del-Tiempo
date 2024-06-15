@@ -26,9 +26,11 @@ Promise.all(importPromises)
       const fileName = readdirSync(PATH_ROUTER).filter(
         (fileName) => fileName !== 'index.ts' && fileName.endsWith('.router.ts')
       )[index]
+      console.log(fileName)
       if (module && module.router) {
         const cleanName = cleanFileName(fileName)
         router.use(`/api/v1/${cleanName}`, module.router)
+        
       }
     })
   })

@@ -8,9 +8,9 @@ import { type Router } from 'express'
 const filePath = path.resolve(__dirname, '../docs/swagger.yaml')
 
 if (!fs.existsSync(filePath)) {
-  console.error(`File not found: ${filePath}`);
+  console.error(`El archivo no funciona: ${filePath}`);
 } else {
-  console.log(`Swagger file path: ${filePath}`);
+  console.log(`Swagger ruta del archivo: ${filePath}`);
 }
 
 const file = fs.readFileSync(filePath, 'utf8')
