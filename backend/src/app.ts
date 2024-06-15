@@ -18,7 +18,7 @@ const app = express()
 
 // Middlewares
 app.use(express.json())
-app.use(cors(corsOptions))
+app.use(cors())
 app.use(morgan('dev'))
 app.use(cookieParser())
 app.disable('x-powered-by')
@@ -30,8 +30,8 @@ app.get('/', (_, res) => {
 
 
 
-const routesWithoutApiKey = ['/api/v1/docs', '/api/docs', '/']
-app.use(excludeRoutes(routesWithoutApiKey, isApiKey))
+// const routesWithoutApiKey = ['/api/v1/docs', '/api/docs', '/']
+// app.use(excludeRoutes(routesWithoutApiKey, isApiKey))
 app.use(router)
 
 app.use((err: any, _req: Request, res: Response, _next: NextFunction): void => {
