@@ -46,7 +46,7 @@ const options = {
     },
     servers: [
       {
-        url: "https://nodejs-swagger-api.vercel.app/",
+        url: "https://guardiandeltiempo-server.vercel.app/",
         description: "My API Documentation",
       },
     ],
@@ -59,13 +59,13 @@ const specs = swaggerJsDoc(options);
 // app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 
 app.use(
-  "/api-docs",
+  "/api/v1/docs",
   swaggerUI.serve,
   swaggerUI.setup(specs, { customCssUrl: CSS_URL })
 );
 
-// const routesWithoutApiKey = ['/api/v1/docs', '/api/docs', '/']
-// app.use(excludeRoutes(routesWithoutApiKey, isApiKey))
+const routesWithoutApiKey = ['/api/v1/docs', '/api/docs', '/']
+app.use(excludeRoutes(routesWithoutApiKey, isApiKey))
 app.use(router)
 
 app.use((err: any, _req: Request, res: Response, _next: NextFunction): void => {
