@@ -6,7 +6,7 @@ import { isApiKey } from './middlewares/apiKey.middleware'
 import { excludeRoutes } from './utils/helpers'
 import cookieParser from 'cookie-parser'
 import { corsOptions } from './utils/config'
-
+import { rutaFile } from './docs/swagger'
 
 
 
@@ -28,7 +28,9 @@ app.get('/', (_, res) => {
   res.send('---Server OK !')
 })
 
-
+app.get('/rutaFile', (_, res) => {
+  res.send(rutaFile())
+})
 
 // const routesWithoutApiKey = ['/api/v1/docs', '/api/docs', '/']
 // app.use(excludeRoutes(routesWithoutApiKey, isApiKey))

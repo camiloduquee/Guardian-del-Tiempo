@@ -1,10 +1,11 @@
 import fs from 'fs'
-import path from 'path' 
+import path from 'path'
 import swaggerUi from 'swagger-ui-express'
 import swaggerJsDoc from "swagger-jsdoc";
-import YAML  from 'yaml'
+import YAML from 'yaml'
 import { Request, Response } from '../utils/types'
 import { type Router } from 'express'
+
 
 const CSS_URL =
   "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
@@ -16,8 +17,10 @@ if (!fs.existsSync(filePath)) {
 } else {
   console.error(`Swagger ruta del archivo: ${filePath}`);
 }
-
+console.log(filePath)
 const file = fs.readFileSync(filePath, 'utf8')
+
+export const rutaFile = () => { return filePath }
 // const swaggerYaml = YAML.parse(file)
 const options = {
   definition: {
@@ -46,8 +49,8 @@ const options = {
 
 const swaggerYaml = swaggerJsDoc(options);
 
-export const swaggerDocs = (app: Router ) => {
-  app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerYaml, {customCss:CSS_URL}))
+export const swaggerDocs = (app: Router) => {
+  app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerYaml, { customCss: CSS_URL }))
   // app.get('/api/docs.json', (_req: Request, res: Response) => {
   //   res.setHeader('Content-Type', 'application/json')
   //   res.send(swaggerYaml)
