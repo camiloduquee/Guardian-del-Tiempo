@@ -48,10 +48,10 @@ const swaggerYaml = swaggerJsDoc(options);
 
 export const swaggerDocs = (app: Router ) => {
   app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerYaml, {customCss:CSS_URL}))
-  app.get('/api/docs.json', (_req: Request, res: Response) => {
-    res.setHeader('Content-Type', 'application/json')
-    res.send(swaggerYaml)
-  })
+  // app.get('/api/docs.json', (_req: Request, res: Response) => {
+  //   res.setHeader('Content-Type', 'application/json')
+  //   res.send(swaggerYaml)
+  // })
 
   console.log(`📄 Docs available at https://guardiandeltiempo-server.vercel.app/api/docs`)
 }
