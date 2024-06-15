@@ -11,12 +11,12 @@ info:
 
     Algunos links de interés:
     - [![](https://img.shields.io/badge/Repositorio-76908e?logo=github)](https://github.com/camiloduquee/Guardian-del-Tiempo)
-    
-    - [![](https://vercel.com/button)](https://guardiandel-tiempo.vercel.app/)
+
+    - [![](https://vercel.com/button)](https://guardiandel-tiempo.vercel.app)
    
 
 servers:
-  - url: https://guardiandeltiempo-server.vercel.app/
+  - url: https://guardiandeltiempo-server.vercel.app
     description: Development server
 
 tags:
