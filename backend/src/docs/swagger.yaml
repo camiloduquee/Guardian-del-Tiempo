@@ -14,7 +14,7 @@ info:
     - [![Deploy](https://vercel.com/button)]()
 
 servers:
-  - url: https://guardiandeltiempo-server.vercel.app
+  - url: https://guardiandeltiempo-server.vercel.app/
     description: Development server
 
 tags:
