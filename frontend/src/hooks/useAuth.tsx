@@ -26,7 +26,7 @@ const useAuth = (): useRequestType => {
         }
     }
     const signUp = async (_data: FRWithoutConfirm): Promise<void> => {
-
+        console.log(_data)
         try {
             const { status } = await registerRequest(_data)
             if (status === 201) {

@@ -1,14 +1,11 @@
 import { Router } from 'express'
 import { readdirSync } from 'fs'
-import { join } from 'path'
+import { join, resolve } from 'path'
 
 
 const router = Router()
-const PATH_ROUTER = __dirname
 
-
-console.log(PATH_ROUTER)
-
+const PATH_ROUTER = resolve(__dirname, '../routes')
 
 const cleanFileName = (fileName: string) => {
   if (typeof fileName === 'string') {
@@ -31,9 +28,10 @@ Promise.all(importPromises)
       const fileName = readdirSync(PATH_ROUTER).filter(
         (fileName) => fileName !== 'index.ts' && fileName.endsWith('.router.ts')
       )[index]
-      console.log({fileName, module})
+      
       if (module && module.router) {
         const cleanName = cleanFileName(fileName)
+        
         router.use(`/api/v1/${cleanName}`, module.router)
 
       }
