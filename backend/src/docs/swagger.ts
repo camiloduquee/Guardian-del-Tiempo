@@ -11,12 +11,6 @@ const CSS_URL =
 
 const filePath = path.resolve(__dirname, '../docs/swagger.yaml')
 
-if (!fs.existsSync(filePath)) {
-  console.log(`El archivo no funciona: ${filePath}`);
-} else {
-  console.error(`Swagger ruta del archivo: ${filePath}`);
-}
-console.log(filePath)
 const file = fs.readFileSync(filePath, 'utf8')
 
 const swaggerYaml = YAML.parse(file);

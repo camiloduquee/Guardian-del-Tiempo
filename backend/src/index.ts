@@ -1,7 +1,6 @@
 import app from './app'
 import { sequelize } from './database/database'
 import { PORT } from './utils/config'
-import { swaggerDocs } from './docs/swagger'
 
 async function validateConnection() {
   const maxRetries = 5;
