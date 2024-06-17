@@ -1,12 +1,13 @@
 import cors from 'cors'
 import express, { Request, Response, NextFunction } from 'express'
 import morgan from 'morgan'
-import { router } from './routes'
+// import { router } from './routes'
 import { isApiKey } from './middlewares/apiKey.middleware'
 import { excludeRoutes } from './utils/helpers'
 import cookieParser from 'cookie-parser'
 import { corsOptions } from './utils/config'
 import { swaggerDocs } from './docs/swagger'
+import { login, register } from './controllers/auth.controller'
 
 const app = express()
 
@@ -26,7 +27,12 @@ swaggerDocs(app)
 
 const routesWithoutApiKey = ['/api/v1/docs', '/api/docs', '/']
 app.use(excludeRoutes(routesWithoutApiKey, isApiKey))
-app.use(router)
+// app.use(router)
+
+
+app.use('/api/v1/auth/login', login )
+app.use('/api/v1/auth/register', register )
+
 
 app.use((err: any, _req: Request, res: Response, _next: NextFunction): void => {
   console.error('Unhandled error:', err)
