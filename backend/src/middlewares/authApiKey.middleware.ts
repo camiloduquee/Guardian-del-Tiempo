@@ -22,13 +22,13 @@ export function authenticateToken(
 ) {
   const token = req.cookies.token as string
   if (!token)
-    return res.status(403).json({ message: 'No token provided, access denied' })
+    return res.status(403).json({ message: 'No existe el token' })
 
   jwt.verify(token, Secret, (err, user) => {
     if (err)
       return res
         .status(403)
-        .json({ message: 'No token provided, access denied' })
+        .json({ message: 'Token Error !' })
     req.userId = (user as UserPayload).id
     next()
   })
