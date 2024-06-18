@@ -21,30 +21,29 @@ export default function Tracker() {
     const [open, setOpen] = useState(false);
     const [options, setOptions] = useState<readonly Project[]>([]);
     const loading = open && options.length === 0;
+    const optionsCors = {
+        method: 'GET',
+        url: `${URL_BASE}/project`,
+        headers: {
+            cookie: `token=${cookies.token}`
+        },
+        withCredentials: true,
+
+    }
 
 
     useEffect(() => {
         let active = true;
-
+      
         if (!loading || options.length > 0) {
             return undefined;
         }
 
         (async () => {
             // const { data } = await projectsRequest()
-            const options = {
-                method: 'GET',
-                url: `${URL_BASE}/project`,
-                headers: {
-                    cookie: `token=${cookies.token}`
-                },
-                withCredentials: true,
+            
 
-            }
-
-            const { data } = await axios.request(options)
-
-
+            const { data } = await axios.request(optionsCors)
 
             if (active) {
                 setOptions([...data]);
