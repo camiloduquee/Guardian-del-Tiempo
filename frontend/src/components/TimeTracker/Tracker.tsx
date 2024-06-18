@@ -35,11 +35,11 @@ export default function Tracker() {
 
                 headers: {
                     cookie: `token=${cookies.token}`,
-                    'User-Agent': 'Insomnia/2023.5.7'
+                    
                 },
                 withCredentials: true,
             }
-
+            
             )
 
             if (active) {
