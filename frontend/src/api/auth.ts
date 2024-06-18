@@ -1,6 +1,7 @@
 import axios from "./axios"
 import { FormLogin, } from "../types"
 
+
 const endpointLogin = "/auth/login"
 const endpointSignUp = "/auth/register"
 const endpointProjets = "/project"

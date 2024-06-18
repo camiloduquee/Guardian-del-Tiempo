@@ -3,6 +3,8 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
 import { projectsRequest } from '../../api/auth';
+import axios from 'axios';
+const URL_BASE = import.meta.env.VITE_BD_URL
 
 interface Project {
     name: string;
@@ -24,7 +26,13 @@ export default function Tracker() {
         }
 
         (async () => {
-            const { data } = await projectsRequest()
+            // const { data } = await projectsRequest()
+            const { data } = await axios({
+                method: 'get',
+                url: `${URL_BASE}/project`,
+                withCredentials: true
+
+            })
 
             if (active) {
                 setOptions([...data]);
