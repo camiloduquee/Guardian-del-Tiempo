@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
-import { projectsRequest } from '../../api/auth';
+// import { projectsRequest } from '../../api/auth';
 import axios from 'axios';
 const URL_BASE = import.meta.env.VITE_BD_URL
 
