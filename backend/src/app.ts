@@ -22,6 +22,12 @@ app.disable('x-powered-by')
 app.get('/', (_, res) => {
   res.send('---Server OK !')
 })
+
+app.use((req, res, next) => {
+  console.log('Cookies: ', req.cookies); // Debería mostrar las cookies enviadas por el cliente
+  next();
+});
+
 // Swagger app documentación
 swaggerDocs(app)
 
