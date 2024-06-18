@@ -31,7 +31,6 @@ export default function Tracker() {
         (async () => {
             // const { data } = await projectsRequest()
 
-            console.log(cookies.token)
             const { data } = await axios.get(`${URL_BASE}/project`, {
 
                 headers: {
@@ -92,7 +91,4 @@ export default function Tracker() {
     );
 }
 
-function getCookie(arg0: string) {
-    throw new Error('Function not implemented.');
-}
 
