@@ -4,12 +4,13 @@ import { sign } from "jsonwebtoken";
 import { createUser } from "./user.controller";
 import { User } from "../models/users.model";
 
+
 import {
   validateFieldBody,
   validateFields,
   validateRequeridFieldsCustom,
 } from "../utils/validationUser";
-import { Expire, Secret } from "../utils/config";
+import { Expire, Secret, hostServer } from "../utils/config";
 
 export async function login(req: Request, res: Response) {
   try {
@@ -44,7 +45,7 @@ export async function login(req: Request, res: Response) {
     const token = sign({ id: userLog.uuid }, `${Secret}`, {
       expiresIn: Expire,
     });
-    res.cookie("token", token);
+    res.cookie("token", token, { domain: hostServer, path: '/', secure: true, httpOnly: true });
     // responde
     return res
       .status(200)

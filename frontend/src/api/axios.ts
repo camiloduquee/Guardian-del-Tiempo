@@ -11,6 +11,7 @@ const instance = ({ credential }: InstanceType) => {
         baseURL: BD_URL,
         withCredentials: credential,
         headers: {
+            'Accept': 'application/json',
             'Content-Type': 'application/json',
             'apikey': API_KEY,
         }

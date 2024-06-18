@@ -20,16 +20,19 @@ export function authenticateToken(
   res: Response,
   next: NextFunction
 ) {
-  const token = req.cookies.token as string
-  if (!token)
-    return res.status(403).json({ message: 'No existe el token' })
+  console.log('Cookies:', req.cookies);  // Log para ver las cookies
+  const token = req.cookies.token as string;
+
+  if (!token) {
+    return res.status(403).json({ message: 'No existe el token' });
+  }
 
   jwt.verify(token, Secret, (err, user) => {
-    if (err)
-      return res
-        .status(403)
-        .json({ message: 'Token Error !' })
-    req.userId = (user as UserPayload).id
-    next()
-  })
+    if (err) {
+      return res.status(403).json({ message: 'Token Error !' });
+    }
+
+    req.userId = (user as UserPayload).id;
+    next();
+  });
 }
