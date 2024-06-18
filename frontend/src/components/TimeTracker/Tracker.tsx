@@ -28,11 +28,12 @@ export default function Tracker() {
         (async () => {
             // const { data } = await projectsRequest()
             const { data } = await axios.get(`${URL_BASE}/project`, {
-                withCredentials: true,
+                
                 headers: {
-                    'Access-Control-Allow-Origin': '*', 
-                    'Content-Type': 'application/json'
-                }
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                withCredentials: true,
             }
 
             )
