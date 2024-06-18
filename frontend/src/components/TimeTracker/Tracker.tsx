@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useAuthUser } from '../../context/auth-context';
 // import { projectsRequest } from '../../api/auth';
 import axios from 'axios';
+
 const URL_BASE = import.meta.env.VITE_BD_URL
 
 interface Project {
@@ -13,10 +15,11 @@ interface Project {
 
 
 export default function Tracker() {
+    const { cookies } = useAuthUser()
     const [open, setOpen] = useState(false);
     const [options, setOptions] = useState<readonly Project[]>([]);
     const loading = open && options.length === 0;
-    console.log(options)
+
 
     useEffect(() => {
         let active = true;
@@ -27,11 +30,13 @@ export default function Tracker() {
 
         (async () => {
             // const { data } = await projectsRequest()
+
+            console.log(cookies.token)
             const { data } = await axios.get(`${URL_BASE}/project`, {
-                
+
                 headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
+                    cookie: `token=${cookies.token}`,
+                    'User-Agent': 'Insomnia/2023.5.7'
                 },
                 withCredentials: true,
             }
@@ -85,5 +90,9 @@ export default function Tracker() {
             )}
         />
     );
+}
+
+function getCookie(arg0: string) {
+    throw new Error('Function not implemented.');
 }
 

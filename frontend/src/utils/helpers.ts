@@ -36,3 +36,9 @@ export const formatName = (str: string) => {
   const formattedNames = names.map(name => name.charAt(0).toUpperCase() + name.slice(1).toLowerCase());
   return formattedNames.join(' '); // Unir los nombres formateados
 };
+
+// export const getCookies = (name:any) => {
+//   const value = `; ${document.cookie}`;
+//   const parts = value.split(`; ${name}=`);
+//   if (parts.length === 2) return parts.pop().split(';').shift();
+// }
