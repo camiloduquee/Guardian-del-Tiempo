@@ -14,6 +14,8 @@ interface Project {
 }
 
 
+
+
 export default function Tracker() {
     const { cookies } = useAuthUser()
     const [open, setOpen] = useState(false);
@@ -30,17 +32,19 @@ export default function Tracker() {
 
         (async () => {
             // const { data } = await projectsRequest()
-
-            const { data } = await axios.get(`${URL_BASE}/project`, {
-
+            const options = {
+                method: 'GET',
+                url: `${URL_BASE}/project`,
                 headers: {
-                    cookie: `token=${cookies.token}`,
-                    
+                    cookie: `token=${cookies.token}`
                 },
                 withCredentials: true,
+
             }
-            
-            )
+
+            const { data } = await axios.request(options)
+
+
 
             if (active) {
                 setOptions([...data]);
