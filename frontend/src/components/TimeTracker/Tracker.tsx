@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -27,12 +27,15 @@ export default function Tracker() {
 
         (async () => {
             // const { data } = await projectsRequest()
-            const { data } = await axios({
-                method: 'get',
-                url: `${URL_BASE}/project`,
-                withCredentials: true
+            const { data } = await axios.get(`${URL_BASE}/project`, {
+                withCredentials: true,
+                headers: {
+                    'Access-Control-Allow-Origin': '*', 
+                    'Content-Type': 'application/json'
+                }
+            }
 
-            })
+            )
 
             if (active) {
                 setOptions([...data]);
@@ -43,8 +46,8 @@ export default function Tracker() {
             active = false;
         };
     }, [loading, options]);
-    
- 
+
+
     const handleOpen = () => {
         setOpen(true);
     };
