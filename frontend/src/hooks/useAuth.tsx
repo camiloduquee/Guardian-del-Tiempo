@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 // import { useAuthUser } from "../context/auth-context";
 
 
-// const option = import.meta.env.VITE_COOKIE_OPTIONS
+const option = import.meta.env.VITE_COOKIE_OPTIONS
 
 
 const useAuth = (): useRequestType => {
@@ -17,16 +17,16 @@ const useAuth = (): useRequestType => {
     const navigate = useNavigate();
     // const cookies = Cookies.get();
     const login = async (_data: FormLogin): Promise<void> => {
-        // const options = () => {
-        //     if (option === 'ON') return { path: "/" } 
-        //     return { path: "/" }
-        // }
+        const options = () => {
+            if (option === 'ON') return { path: "/", secure: true } 
+            return { path: "/" }
+        }
 
         try {
             const { data, status } = await loginRequest(_data)
 
             if (status === 200) {
-                Cookies.set('token', data.token)
+                Cookies.set('token', data.token, options)
                 navigate('/dashboard')
             }
 
