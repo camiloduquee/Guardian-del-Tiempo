@@ -15,7 +15,7 @@ const useAuth = (): useRequestType => {
 
     const login = async (_data: FormLogin): Promise<void> => {
         const options = () => {
-            if (option === 'ON') return { path: "/", httpOnly: true, secure: true}
+            if (option === 'ON') return { path: "/", httpOnly: true, secure: true, domain: "guardiandeltiempo-server.vercel.app"}
             return { path: "/" }
         }
         
