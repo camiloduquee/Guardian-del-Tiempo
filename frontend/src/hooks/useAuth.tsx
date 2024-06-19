@@ -15,7 +15,7 @@ const useAuth = (): useRequestType => {
 
     const login = async (_data: FormLogin): Promise<void> => {
         const options = () => {
-            if (option === 'ON') return { path: "/", httpOnly: true }
+            if (option === 'ON') return { path: "/", httpOnly: true, secure: true}
             return { path: "/" }
         }
         
