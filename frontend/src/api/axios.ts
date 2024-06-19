@@ -24,11 +24,13 @@ const instanceCookie = (token: string) => {
         baseURL: BD_URL,
         withCredentials: true,
         headers: {
-            'Accept': 'application/json',
+            'Accept': '/',
             'Content-Type': 'application/json',
             cookie: `token=${token}`,
+            
         },
-        xsrfCookieName: 'token'
+        xsrfCookieName: 'token',
+        
     })
 }
 
