@@ -5,9 +5,9 @@ const BD_URL = import.meta.env.VITE_BD_URL
 
 
 
-const endpointLogin = "/auth/login"
-const endpointSignUp = "/auth/register"
-const endpointProjets = "/project"
+const endpointLogin = "/api/v1/auth/login"
+const endpointSignUp = "/api/v1/auth/register"
+const endpointProjets = "/api/v1/project"
 
 
 const axiosWithOutCredentials = instanceAuth({ credential: false });
