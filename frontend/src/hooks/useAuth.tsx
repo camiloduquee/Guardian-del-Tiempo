@@ -2,29 +2,31 @@ import { useNavigate } from "react-router-dom"
 import { registerRequest, loginRequest } from "../api/auth";
 import type { FormLogin, FRWithoutConfirm, useRequestType } from "types";
 import { toast } from 'react-toastify';
-import { useAuthUser } from "../context/auth-context";
-const option = import.meta.env.VITE_COOKIE_OPTIONS
+import Cookies from "js-cookie";
+// import { useAuthUser } from "../context/auth-context";
+
+
+// const option = import.meta.env.VITE_COOKIE_OPTIONS
 
 
 const useAuth = (): useRequestType => {
 
-    const { setCookie, cookies } = useAuthUser()
+    // const { setCookie, cookies } = useAuthUser()
 
 
     const navigate = useNavigate();
-
+    // const cookies = Cookies.get();
     const login = async (_data: FormLogin): Promise<void> => {
-        const options = () => {
-            if (option === 'ON') return { path: "/" } 
-            return { path: "/" }
-        }
-        
+        // const options = () => {
+        //     if (option === 'ON') return { path: "/" } 
+        //     return { path: "/" }
+        // }
+
         try {
             const { data, status } = await loginRequest(_data)
 
             if (status === 200) {
-                setCookie('token', data.token, options);
-                console.log(cookies.token)
+                Cookies.set('token', data.token)
                 navigate('/dashboard')
             }
 

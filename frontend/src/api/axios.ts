@@ -19,17 +19,16 @@ const instanceAuth = ({ credential }: InstanceType) => {
     })
 }
 
-const instanceCookie = (token: string) => {
+const instanceCookie = ( ) => {
     return axios.create({
+        method: 'get',
         baseURL: BD_URL,
         withCredentials: true,
         headers: {
             'Accept': '/',
-            'Content-Type': 'application/json',
-            cookie: `token=${token}`,
-            
+            'Content-Type': 'application/json',          
         },
-        xsrfCookieName: 'token',
+        
         
     })
 }

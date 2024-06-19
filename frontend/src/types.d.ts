@@ -33,12 +33,12 @@ export interface User {
 }
 export interface AuthContextType {
   user: User | null;
-  cookies: any;
+  // cookies: any;
   // login: (data: FormLogin) => Promise<void>;
   // signUp: (data: FRWithoutConfirm) => Promise<void>;
   logout: Function;
   isAuthenticated: any;
-  setCookie: Function
+  // setCookie: Function
 }
 
 export interface stateSideBarProps {

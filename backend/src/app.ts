@@ -24,7 +24,7 @@ app.get('/', (_, res) => {
 })
 
 app.use((req, res, next) => {
-  console.log('Cookies_Header_BASE: ', req.headers.cookie); // Debería mostrar las cookies enviadas por el cliente
+  console.log('Cookies_Header_BASE: ', req.headers.cookie, req.cookies ); // Debería mostrar las cookies enviadas por el cliente
   next();
 });
 

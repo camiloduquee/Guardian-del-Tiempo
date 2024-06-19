@@ -1,13 +1,12 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { jwtDecode } from 'jwt-decode';
 import { AuthContextType, User } from "../types";
-import { CookiesProvider } from 'react-cookie';
-import { useCookies } from "react-cookie";
+import Cookies from "js-cookie"
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [cookies, setCookie, removeCookie] = useCookies(['token']);
+ 
 
   const [user, setUser] = useState<User | null>(() => {
 
@@ -25,12 +24,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const logout = () => {
     setUser(null);
-    removeCookie('token');
+    Cookies.remove('token');
   }
 
   const isAuthenticated = () => {
     const delet = localStorage.removeItem('user');
-    const token = cookies.token;
+    const token = Cookies.get('token');
     if (!token) {
       delet
       return false;
@@ -49,11 +48,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <CookiesProvider defaultSetOptions={{ path: '/' }}>
-      <AuthContext.Provider value={{ user, isAuthenticated, logout, setCookie, cookies }}>
+   
+      <AuthContext.Provider value={{ user, isAuthenticated, logout }}>
         {children}
       </AuthContext.Provider>
-    </CookiesProvider>
+    
   )
 
 }
