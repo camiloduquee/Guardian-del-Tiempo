@@ -20,7 +20,7 @@ app.disable('x-powered-by')
 
 // Routes
 app.get('/', (_, res) => {
-  res.send('---Server OK !')
+  res.send(`---Server OK !` )
 })
 
 app.use((req, res, next) => {

@@ -19,6 +19,6 @@ export const DATABASE_CONFIG: DatabaseConfig = {
     dialectModule: pg,
 }
 
-export const corsOptions = { origin: true, credentials: true };
+export const corsOptions = { origin: hostFront, credentials: true };
 
 
