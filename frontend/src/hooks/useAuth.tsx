@@ -3,24 +3,27 @@ import { registerRequest, loginRequest } from "../api/auth";
 import type { FormLogin, FRWithoutConfirm, useRequestType } from "types";
 import { toast } from 'react-toastify';
 import { useAuthUser } from "../context/auth-context";
-const options = import.meta.env.VITE_COOKIE_OPTIONS
+const option = import.meta.env.VITE_COOKIE_OPTIONS
 
 
 const useAuth = (): useRequestType => {
-    
-     const { setCookie, cookies } = useAuthUser()
-   
+
+    const { setCookie, cookies } = useAuthUser()
+
 
     const navigate = useNavigate();
 
     const login = async (_data: FormLogin): Promise<void> => {
-        const parseString = JSON.parse(options)
-        console.log(parseString)
+        const options = () => {
+            if (option === 'ON') return { path: "/", httpOnly: true }
+            return { path: "/" }
+        }
+        
         try {
             const { data, status } = await loginRequest(_data)
-            
+
             if (status === 200) {
-                setCookie('token', data.token, JSON.parse(options));
+                setCookie('token', data.token, options);
                 console.log(cookies.token)
                 navigate('/dashboard')
             }
