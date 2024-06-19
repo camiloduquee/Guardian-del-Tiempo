@@ -21,6 +21,7 @@ export function authenticateToken(
   next: NextFunction
 ) {
   console.log('Cookies:', req.cookies);  // Log para ver las cookies
+  console.log('Cookie_Header_Middkeware:', req.headers.cookie);  // Log para ver las cookies
   const token = req.cookies.token as string;
 
   if (!token) {

@@ -27,7 +27,8 @@ const instanceCookie = (token: string) => {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             cookie: `token=${token}`,
-        }
+        },
+        xsrfCookieName: 'token'
     })
 }
 
