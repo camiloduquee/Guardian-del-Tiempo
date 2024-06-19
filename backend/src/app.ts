@@ -24,7 +24,7 @@ app.get('/', (_, res) => {
 })
 
 app.use((req, res, next) => {
-  console.log({ Cookies: req.cookies, Headers: req.headers }); // Debería mostrar las cookies enviadas por el cliente
+  console.log({ Cookies: req.cookies.token, Headers: req.headers,  }); // Debería mostrar las cookies enviadas por el cliente
   next();
 });
 

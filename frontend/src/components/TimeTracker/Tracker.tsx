@@ -27,7 +27,7 @@ export default function Tracker() {
 
         (async () => {
          
-            const { data } = await projectsRequest(cookies)
+            const { data } = await projectsRequest(cookies.token)
 
             if (active) {
                 setOptions([...data]);

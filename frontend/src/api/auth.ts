@@ -25,10 +25,14 @@ export const registerRequest = async (data: any) => {
 // RUTAS DE PROYECTOS CON CREDENCIAL
 
 export const projectsRequest = async (cookies: any) => {
-    return await axios.get(`${BD_URL}${endpointProjets}`,{
+    return await axios.get(`${BD_URL}${endpointProjets}`, {
         withCredentials: true,
-        xsrfCookieName: cookies
-    
+        xsrfCookieName: cookies,
+        xsrfHeaderName: "token",
+        headers: {
+            cookie: cookies
+        }
+
     })
 
 }
