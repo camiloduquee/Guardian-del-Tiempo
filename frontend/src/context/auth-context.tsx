@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { jwtDecode } from 'jwt-decode';
 import { AuthContextType, User } from "../types";
+import { CookiesProvider } from 'react-cookie';
 import { useCookies } from "react-cookie";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -48,14 +49,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, logout, setCookie, cookies }}>
-      {children}
-    </AuthContext.Provider>
+    <CookiesProvider defaultSetOptions={{ path: '/' }}>
+      <AuthContext.Provider value={{ user, isAuthenticated, logout, setCookie, cookies }}>
+        {children}
+      </AuthContext.Provider>
+    </CookiesProvider>
   )
 
 }
 
-export  const useAuthUser = (): AuthContextType => {
+export const useAuthUser = (): AuthContextType => {
   const context = useContext(AuthContext)
   if (!context) {
     throw new Error('useAuth must be used within an AuthProvider')

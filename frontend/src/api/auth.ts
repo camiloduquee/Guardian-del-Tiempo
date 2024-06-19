@@ -1,4 +1,4 @@
-import axios from "./axios"
+import { instanceAuth, instanceCookie } from "./axios"
 import { FormLogin, } from "../types"
 
 
@@ -7,8 +7,8 @@ const endpointSignUp = "/auth/register"
 const endpointProjets = "/project"
 
 
-const axiosWithOutCredentials = axios({ credential: false });
-const axiosWithCredentials = axios({ credential: true });
+const axiosWithOutCredentials = instanceAuth({ credential: false });
+// const axiosWithCredentials = instanceAuth({ credential: true });
 
 // RUTAS PARA INICIAR SESIÓN Y REGISTRARSE
 
@@ -21,7 +21,10 @@ export const registerRequest = async (data: any) => {
 
 // RUTAS DE PROYECTOS CON CREDENCIAL
 
-export const projectsRequest = async () => {
-   return  await axiosWithCredentials.get(endpointProjets)
-    
+export const projectsRequest = async (token: string) => {
+    return await instanceCookie(token).get(endpointProjets)
+
 }
+
+
+

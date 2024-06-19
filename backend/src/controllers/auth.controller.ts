@@ -45,7 +45,7 @@ export async function login(req: Request, res: Response) {
     const token = sign({ id: userLog.uuid }, `${Secret}`, {
       expiresIn: Expire,
     });
-    res.cookie("token", token, {  sameSite: 'none' });
+    res.cookie("token", token, { httpOnly: true, secure: true, sameSite: 'strict' });
     // responde
     return res
       .status(200)
