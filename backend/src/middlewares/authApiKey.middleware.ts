@@ -25,7 +25,7 @@ export function authenticateToken(
   const token = req.cookies.token as string;
 
   if (!token) {
-    return res.status(403).json({ message: 'No existe el token' });
+    return res.status(403).json({ message: 'No existe el token', cookies:req.cookies });
   }
 
   jwt.verify(token, Secret, (err, user) => {
