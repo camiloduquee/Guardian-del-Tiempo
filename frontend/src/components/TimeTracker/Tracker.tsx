@@ -3,7 +3,6 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
 import { projectsRequest } from '../../api/auth';
-import Cookies from 'js-cookie';
 
 interface Project {
     name: string;
@@ -12,7 +11,7 @@ interface Project {
 
 
 export default function Tracker() {
-    const cookies = Cookies.get()
+
     const [open, setOpen] = useState(false);
     const [options, setOptions] = useState<readonly Project[]>([]);
     const loading = open && options.length === 0;
@@ -26,8 +25,8 @@ export default function Tracker() {
         }
 
         (async () => {
-         
-            const { data } = await projectsRequest(cookies.token)
+
+            const { data } = await projectsRequest()
 
             if (active) {
                 setOptions([...data]);

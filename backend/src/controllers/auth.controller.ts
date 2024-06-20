@@ -10,7 +10,7 @@ import {
   validateFields,
   validateRequeridFieldsCustom,
 } from "../utils/validationUser";
-import { Expire, Secret, hostServer } from "../utils/config";
+import { Expire, Secret } from "../utils/config";
 
 export async function login(req: Request, res: Response) {
   try {
@@ -45,7 +45,11 @@ export async function login(req: Request, res: Response) {
     const token = sign({ id: userLog.uuid }, `${Secret}`, {
       expiresIn: Expire,
     });
-    res.cookie("token", token, { httpOnly: true, secure: true, sameSite: 'none'});
+    // -------Optiones de las cookies en producción ON 
+    // httpOnly: Para que en el frontend no se pueda manipular por medio javascript
+    // secure: Para que solo se mande las cookies por conexión https
+    // sameSite: para que la cookies se envie entre dominios
+    res.cookie("token", token, { httpOnly: true, secure: true, sameSite: 'none' });
     // responde
     return res
       .status(200)

@@ -3,12 +3,6 @@ import { registerRequest, loginRequest } from "../api/auth";
 import type { FormLogin, FRWithoutConfirm, useRequestType } from "types";
 import { toast } from 'react-toastify';
 import { useAuthUser } from "../context/auth-context";
-// import Cookies from "js-cookie";
-
-
-
-// const option = import.meta.env.VITE_COOKIE_OPTIONS
-
 
 const useAuth = (): useRequestType => {
 
@@ -16,13 +10,9 @@ const useAuth = (): useRequestType => {
 
 
     const navigate = useNavigate();
-    // const cookies = Cookies.get();
+   
     const login = async (_data: FormLogin): Promise<void> => {
-        // const options = () => {
-        //     if (option === 'ON') return { path: "/", httpOnly: true, secure: true, sameSite: 'none'} 
-        //     return { path: "/" }
-        // }
-
+  
         try {
             const { status } = await loginRequest(_data)
 

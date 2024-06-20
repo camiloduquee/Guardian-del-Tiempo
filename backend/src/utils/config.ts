@@ -7,7 +7,7 @@ export const Secret = process.env.JWT_SECRET as string
 export const Expire = process.env.JWT_EXPIRE as string
 export const Key = process.env.API_KEY as string
 export const hostFront = process.env.HOST_FRONT as string
-export const hostServer = process.env.HOST_SERVER as string
+
 
 export const DATABASE_CONFIG: DatabaseConfig = {
     database: process.env.DATABASE || '',

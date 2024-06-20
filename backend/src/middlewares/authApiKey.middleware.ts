@@ -20,17 +20,16 @@ export function authenticateToken(
   res: Response,
   next: NextFunction
 ) {
-  console.log('Cookies:', req.cookies);  // Log para ver las cookies
-  console.log('Cookie_Header_Middkeware:', req.headers.cookie);  // Log para ver las cookies
+
   const token = req.cookies.token as string;
 
   if (!token) {
-    return res.status(403).json({ message: 'No existe el token', cookies:req.cookies });
+    return res.status(403).json({ message: 'No existe el token' });
   }
 
   jwt.verify(token, Secret, (err, user) => {
     if (err) {
-      return res.status(403).json({ message: 'Token Error !', token: token });
+      return res.status(403).json({ message: 'Error de autentificación del token!' });
     }
 
     req.userId = (user as UserPayload).id;

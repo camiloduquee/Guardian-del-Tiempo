@@ -37,8 +37,3 @@ export const formatName = (str: string) => {
   return formattedNames.join(' '); // Unir los nombres formateados
 };
 
-// export const getCookies = (name:any) => {
-//   const value = `; ${document.cookie}`;
-//   const parts = value.split(`; ${name}=`);
-//   if (parts.length === 2) return parts.pop().split(';').shift();
-// }
