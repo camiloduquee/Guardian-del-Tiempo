@@ -39,6 +39,7 @@ export interface AuthContextType {
   logout: Function;
   isAuthenticated: any;
   // setCookie: Function
+  setValidate: Function
 }
 
 export interface stateSideBarProps {

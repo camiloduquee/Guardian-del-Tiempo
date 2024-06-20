@@ -2,31 +2,33 @@ import { useNavigate } from "react-router-dom"
 import { registerRequest, loginRequest } from "../api/auth";
 import type { FormLogin, FRWithoutConfirm, useRequestType } from "types";
 import { toast } from 'react-toastify';
-import Cookies from "js-cookie";
-// import { useAuthUser } from "../context/auth-context";
+import { useAuthUser } from "../context/auth-context";
+// import Cookies from "js-cookie";
 
 
-const option = import.meta.env.VITE_COOKIE_OPTIONS
+
+// const option = import.meta.env.VITE_COOKIE_OPTIONS
 
 
 const useAuth = (): useRequestType => {
 
-    // const { setCookie, cookies } = useAuthUser()
+    const { setValidate } = useAuthUser()
 
 
     const navigate = useNavigate();
     // const cookies = Cookies.get();
     const login = async (_data: FormLogin): Promise<void> => {
-        const options = () => {
-            if (option === 'ON') return { path: "/", secure: true } 
-            return { path: "/" }
-        }
+        // const options = () => {
+        //     if (option === 'ON') return { path: "/", httpOnly: true, secure: true, sameSite: 'none'} 
+        //     return { path: "/" }
+        // }
 
         try {
-            const { data, status } = await loginRequest(_data)
+            const { status } = await loginRequest(_data)
 
             if (status === 200) {
-                Cookies.set('token', data.token, options)
+                //AGREGAR DATOS DEL USUARIO AQUI , CREAR ESTADO 
+                setValidate((status: Boolean) => status = true)
                 navigate('/dashboard')
             }
 

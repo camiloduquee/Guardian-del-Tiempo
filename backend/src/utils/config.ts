@@ -19,6 +19,11 @@ export const DATABASE_CONFIG: DatabaseConfig = {
     dialectModule: pg,
 }
 
-export const corsOptions = { origin: hostFront, credentials: true };
+export const corsOptions = 
+    { 
+        origin: hostFront, 
+        methods: 'GET, HEAD, PUT,PATCH, POST, DELETE', 
+        credentials: true 
+    };
 
 

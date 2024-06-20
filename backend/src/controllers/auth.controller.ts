@@ -45,11 +45,12 @@ export async function login(req: Request, res: Response) {
     const token = sign({ id: userLog.uuid }, `${Secret}`, {
       expiresIn: Expire,
     });
-    res.cookie("token", token, { httpOnly: true, secure: true });
+    res.cookie("token", token, { httpOnly: true, secure: true, sameSite: 'none'});
     // responde
     return res
       .status(200)
       .json({ message: "El inicio de sesión ha sido exitoso.", token });
+
   } catch (error) {
     return res.status(500).json({
       message: "El inicio de sesión tiene un error interno del Servidor,",
