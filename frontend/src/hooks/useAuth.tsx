@@ -28,7 +28,7 @@ const useAuth = (): useRequestType => {
 
             if (status === 200) {
                 //AGREGAR DATOS DEL USUARIO AQUI , CREAR ESTADO 
-                setValidate((status: Boolean) => status = true)
+                setValidate(true)
                 navigate('/dashboard')
             }
 
