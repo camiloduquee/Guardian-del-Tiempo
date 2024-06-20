@@ -23,10 +23,10 @@ app.get('/', (_, res) => {
   res.send(`---Server OK !` )
 })
 
-app.use((req, res, next) => {
-  console.log({ Cookies: req.cookies.token, Headers: req.headers,  }); // Debería mostrar las cookies enviadas por el cliente
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log({ Cookies: req.cookies.token, Headers: req.headers,  }); // Debería mostrar las cookies enviadas por el cliente
+//   next();
+// });
 
 // Swagger app documentación
 swaggerDocs(app)
