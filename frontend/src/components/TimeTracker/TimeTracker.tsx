@@ -1,10 +1,15 @@
-import { Divider, Stack, Button, Box } from "@mui/material"
+import { Divider, Stack, Button, Box, Chip } from "@mui/material"
 import Tracker from "./Tracker"
 import { MonetizationOn, AccessTime } from "@mui/icons-material"
 
 import GroupTask from "./GroupTask"
+import { useState } from "react"
+import type {Project} from 'types/TimeTracker'
+
+
 
 const TimeTracker = () => {
+  const [options, setOptions] = useState<Project[]>([]);
   return (
     <>
       <section className=" bg-slate-100">
@@ -17,7 +22,10 @@ const TimeTracker = () => {
           divider={<Divider orientation="vertical" flexItem />}
           spacing={2}
         >
-          <Tracker />
+          <Tracker options={options} setOptions={setOptions}/>
+          <Chip label={`Precio 1h ${options.price_hour ? options.price_hour : ''}`} icon={<MonetizationOn />} color="primary"/>
+            
+          
           <MonetizationOn />
           <div>
             <p>02:19:00</p>
