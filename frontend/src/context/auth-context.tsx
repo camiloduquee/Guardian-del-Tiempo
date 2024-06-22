@@ -1,13 +1,13 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import { jwtDecode } from 'jwt-decode';
+// import { jwtDecode } from 'jwt-decode';
 import { AuthContextType, User } from "../types";
-import { useCookies } from "react-cookie";
+import Cookies from "js-cookie"
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [cookies, setCookie, removeCookie] = useCookies(['token']);
-
+ 
+  const [validate, setValidate] = useState(false)
   const [user, setUser] = useState<User | null>(() => {
 
     const savedUser = localStorage.getItem('user');
@@ -24,33 +24,43 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const logout = () => {
     setUser(null);
-    removeCookie('token');
+    Cookies.remove('token');
+    setValidate((validate) => validate === false)
   }
 
+
+  // Arreglar validacion con token desde el back-end: pendiente crear ruta o middleware
   const isAuthenticated = () => {
-    const delet = localStorage.removeItem('user');
-    const token = cookies.token;
-    if (!token) {
-      delet
+    // const delet = localStorage.removeItem('user');
+    // const token = Cookies.get('token');
+    
+    
+   
+    
+    if (!validate) {
+      setValidate(false)
       return false;
     }
-    try {
-      const decoded = jwtDecode(token);
-      if (decoded.exp && decoded.exp * 1000 < Date.now()) {
-        delet
-        return false
-      }
-      return true;
-    } catch (error) {
-      delet
-      return false;
-    }
+    // try {
+    //   // const decoded = jwtDecode(token);
+    //   // if (decoded.exp && decoded.exp * 1000 < Date.now()) {
+    //   //   delet
+    //   //   return false
+    //   // }
+    //   return true;
+    // } catch (error) {
+    //   delet
+    //   return false;
+    // }
+    return true
   };
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, logout, setCookie }}>
-      {children}
-    </AuthContext.Provider>
+   
+      <AuthContext.Provider value={{ user, isAuthenticated, logout, setValidate }}>
+        {children}
+      </AuthContext.Provider>
+    
   )
 
 }

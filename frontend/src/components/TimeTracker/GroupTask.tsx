@@ -29,7 +29,7 @@ const GroupTask = ({ status }: GroupTypes) => {
 
     return (
         <Box borderRadius={2} bgcolor={color} boxShadow={1} width='80vw'>
-            <Grid xs={12} md={6}>
+            <Grid>
                 <Typography sx={{ mt: 4, mb: 2, textAlign: 'center' }} variant="h6" component="div" color='white'>
                     {status}
                 </Typography>

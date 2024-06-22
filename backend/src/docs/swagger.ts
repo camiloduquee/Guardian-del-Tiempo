@@ -1,18 +1,30 @@
 import fs from 'fs'
+import path from 'path'
 import swaggerUi from 'swagger-ui-express'
-import yaml from 'yaml'
+import YAML from 'yaml'
 import { Request, Response } from '../utils/types'
 import { type Router } from 'express'
 
-const file = fs.readFileSync('./src/docs/swagger.yaml', 'utf8')
-const swaggerYaml = yaml.parse(file)
+// CDN ----
+const CSS_URL =
+  "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.6.2/swagger-ui.min.css";
 
-export const swaggerDocs = (app: Router, port: number) => {
-  app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerYaml))
+const filePath = path.resolve(__dirname, '../docs/swagger.yaml')
+
+const file = fs.readFileSync(filePath, 'utf8')
+
+const swaggerYaml = YAML.parse(file);
+
+export const swaggerDocs = (app: Router) => {
+  app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerYaml, {
+    customCss:
+      '.swagger-ui .opblock .opblock-summary-path-description-wrapper { align-items: center; display: flex; flex-wrap: wrap; gap: 0 10px; padding: 0 10px; width: 100%; }',
+    customCssUrl: CSS_URL,
+  }))
   app.get('/api/docs.json', (_req: Request, res: Response) => {
     res.setHeader('Content-Type', 'application/json')
     res.send(swaggerYaml)
   })
 
-  console.log(`📄 Docs available at http://localhost:${port}/api/docs`)
+  console.log(`📄 Docs available at https://guardiandeltiempo-server.vercel.app/api/docs`)
 }

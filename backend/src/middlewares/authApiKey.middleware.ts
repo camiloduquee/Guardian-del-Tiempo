@@ -20,16 +20,19 @@ export function authenticateToken(
   res: Response,
   next: NextFunction
 ) {
-  const token = req.cookies.token as string
-  if (!token)
-    return res.status(403).json({ message: 'No token provided, access denied' })
+
+  const token = req.cookies.token as string;
+
+  if (!token) {
+    return res.status(403).json({ message: 'No existe el token' });
+  }
 
   jwt.verify(token, Secret, (err, user) => {
-    if (err)
-      return res
-        .status(403)
-        .json({ message: 'No token provided, access denied' })
-    req.userId = (user as UserPayload).id
-    next()
-  })
+    if (err) {
+      return res.status(403).json({ message: 'Error de autentificación del token!' });
+    }
+
+    req.userId = (user as UserPayload).id;
+    next();
+  });
 }

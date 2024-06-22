@@ -23,14 +23,14 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Register: React.FC = () => {
   const { signUp } = useAuth()
-  const { control, handleSubmit } = useForm<FormRegister>({ resolver: zodResolver(registerValidation) })
+  const { control, handleSubmit, formState:{errors} } = useForm<FormRegister>({ resolver: zodResolver(registerValidation) })
 
   const options = [
     { id: 1, label: 'Freelance' },
     { id: 2, label: 'Cliente' },
 
   ]
-
+  console.log(errors)
   return (
     <React.Fragment>
       <ToastContainer />

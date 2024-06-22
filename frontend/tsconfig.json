@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "typeRoots": ["./types", "./node_modules/@types"],
     "baseUrl": "src",  // Establece la base de las rutas como el directorio src
       "paths": {
         "@types/*": ["types/*"],  // Define un alias @types para la carpeta types
@@ -8,9 +9,9 @@
         "@routes/*": ["routes/*"],  // Alias para la carpeta routes
         "@utils/*": ["utils/*"]  // Alias para la carpeta utils
        },
-    "target": "ES2020",
+    "target": "ES2022",
     "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
 
@@ -28,6 +29,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src","types"],
   "references": [{ "path": "./tsconfig.node.json" }]
+  
 }

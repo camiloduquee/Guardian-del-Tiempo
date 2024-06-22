@@ -36,3 +36,4 @@ export const formatName = (str: string) => {
   const formattedNames = names.map(name => name.charAt(0).toUpperCase() + name.slice(1).toLowerCase());
   return formattedNames.join(' '); // Unir los nombres formateados
 };
+

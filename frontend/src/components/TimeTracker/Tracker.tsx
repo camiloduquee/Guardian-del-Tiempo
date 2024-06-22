@@ -1,20 +1,17 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
 import { projectsRequest } from '../../api/auth';
-
-interface Project {
-    name: string;
-    price_hour: string
-}
+import type { Project, TrackerProps } from 'types/TimeTracker'
 
 
-export default function Tracker() {
+
+const Tracker: React.FC<TrackerProps> = ({ options, setOptions, setValue }) => {
+
     const [open, setOpen] = useState(false);
-    const [options, setOptions] = useState<readonly Project[]>([]);
     const loading = open && options.length === 0;
-    console.log(options)
+    
 
     useEffect(() => {
         let active = true;
@@ -24,10 +21,13 @@ export default function Tracker() {
         }
 
         (async () => {
+
             const { data } = await projectsRequest()
+
 
             if (active) {
                 setOptions([...data]);
+
             }
         })();
 
@@ -35,8 +35,8 @@ export default function Tracker() {
             active = false;
         };
     }, [loading, options]);
-    
- 
+
+
     const handleOpen = () => {
         setOpen(true);
     };
@@ -44,16 +44,27 @@ export default function Tracker() {
     const handleClose = () => {
         setOpen(false);
     };
+    
+
+    // const selectedValues = React.useMemo(
+    //     () => options.filter((v) => v.selected),
+    //     [options],
+    //   );
+    
     return (
         <Autocomplete
-            id="asynchronous-demo"
-
+            id="select-project"
             sx={{ width: 300, background: 'white' }}
             open={open}
+            loadingText='Cargando'
             onOpen={handleOpen}
             onClose={handleClose}
-            isOptionEqualToValue={(option, value) => option.name === value.name}
+            isOptionEqualToValue={(option, value) => option.uuid === value.uuid}
             getOptionLabel={(option) => option.name}
+            onChange={(_event, newValue: Project | null) => {
+                setValue(newValue);
+              }}
+
             options={options}
             loading={loading}
             renderInput={(params) => (
@@ -74,4 +85,4 @@ export default function Tracker() {
         />
     );
 }
-
+export default Tracker

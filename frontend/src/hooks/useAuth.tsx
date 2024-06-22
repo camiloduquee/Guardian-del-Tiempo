@@ -4,19 +4,21 @@ import type { FormLogin, FRWithoutConfirm, useRequestType } from "types";
 import { toast } from 'react-toastify';
 import { useAuthUser } from "../context/auth-context";
 
-
-
 const useAuth = (): useRequestType => {
-    const { setCookie } = useAuthUser()
+
+    const { setValidate } = useAuthUser()
+
 
     const navigate = useNavigate();
-
+   
     const login = async (_data: FormLogin): Promise<void> => {
-
+  
         try {
-            const { data, status } = await loginRequest(_data)
+            const { status } = await loginRequest(_data)
+
             if (status === 200) {
-                setCookie('token', data.token, { path: '/' });
+                //AGREGAR DATOS DEL USUARIO AQUI , CREAR ESTADO 
+                setValidate(true)
                 navigate('/dashboard')
             }
 
@@ -26,7 +28,7 @@ const useAuth = (): useRequestType => {
         }
     }
     const signUp = async (_data: FRWithoutConfirm): Promise<void> => {
-
+        console.log(_data)
         try {
             const { status } = await registerRequest(_data)
             if (status === 201) {

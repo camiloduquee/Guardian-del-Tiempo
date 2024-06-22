@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: s15-28-m-node-react
+  title: Guardian del Tiempo
   version: 1.0.0
   description: |-
     Guardianes del Tiempo Freelance es una plataforma innovadora diseñada para optimizar la gestión de proyectos y tareas de freelancers. Con Guardianes del Tiempo Freelance, los profesionales independientes pueden manejar eficientemente múltiples proyectos simultáneamente, lo que les permite maximizar su productividad y aumentar sus ingresos.
@@ -10,11 +10,13 @@ info:
     - Operaciones de autenticación, para el acceso de usuarios y de la consulta.
 
     Algunos links de interés:
-    - [![](https://img.shields.io/badge/Repositorio-76908e?logo=github)](https://github.com/No-Country/s15-28-m-node-react)
-    - [![Deploy](https://vercel.com/button)]()
+    - [![](https://img.shields.io/badge/Repositorio-76908e?logo=github)](https://github.com/camiloduquee/Guardian-del-Tiempo)
+
+    - [![](https://vercel.com/button)](https://guardiandel-tiempo.vercel.app)
+   
 
 servers:
-  - url: http://localhost:3000/api/v1
+  - url: https://guardiandeltiempo-server.vercel.app
     description: Development server
 
 tags:
