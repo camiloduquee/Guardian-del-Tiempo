@@ -1,6 +1,7 @@
 export interface TrackerProps {
     options: Project[];
     setOptions: React.Dispatch<React.SetStateAction<Project[]>>;
+    setValue: function
 }
 
 // Definiciones de tipos para proyecto

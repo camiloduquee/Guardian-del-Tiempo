@@ -4,12 +4,15 @@ import { MonetizationOn, AccessTime } from "@mui/icons-material"
 
 import GroupTask from "./GroupTask"
 import { useState } from "react"
-import type {Project} from 'types/TimeTracker'
+import type { Project } from 'types/TimeTracker'
 
 
 
 const TimeTracker = () => {
   const [options, setOptions] = useState<Project[]>([]);
+  const [value, setValue] = useState<Project | null>(null);
+  console.log(value)
+  
   return (
     <>
       <section className=" bg-slate-100">
@@ -22,10 +25,10 @@ const TimeTracker = () => {
           divider={<Divider orientation="vertical" flexItem />}
           spacing={2}
         >
-          <Tracker options={options} setOptions={setOptions}/>
-          <Chip label={`Precio 1h ${options.price_hour ? options.price_hour : ''}`} icon={<MonetizationOn />} color="primary"/>
-            
-          
+          <Tracker options={options} setOptions={setOptions} setValue={setValue} />
+          <Chip label={value?.price_hour ? `${value?.price_hour} /hora` : '-'} icon={<MonetizationOn />} color="primary" />
+
+
           <MonetizationOn />
           <div>
             <p>02:19:00</p>
@@ -39,20 +42,20 @@ const TimeTracker = () => {
           </Button>
         </Stack>
       </section>
-      <Box 
-        marginTop={10} 
-        
-        >
+      <Box
+        marginTop={10}
+
+      >
         <Stack
           justifyContent="center"
           alignItems="center"
           direction={{ sm: 'column', md: 'row' }}
-          spacing={{ sm: 4, md: 8}}
+          spacing={{ sm: 4, md: 8 }}
         >
-          <GroupTask status='ABIERTO'/>
-          <GroupTask status='EN PROCESO'/>
-          <GroupTask status='PRUEBA'/>
-          <GroupTask status='COMPLETADO'/>
+          <GroupTask status='ABIERTO' />
+          <GroupTask status='EN PROCESO' />
+          <GroupTask status='PRUEBA' />
+          <GroupTask status='COMPLETADO' />
         </Stack>
       </Box>
 

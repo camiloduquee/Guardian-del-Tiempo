@@ -7,11 +7,11 @@ import type { Project, TrackerProps } from 'types/TimeTracker'
 
 
 
-const Tracker: React.FC<TrackerProps> = ({ options, setOptions }) => {
+const Tracker: React.FC<TrackerProps> = ({ options, setOptions, setValue }) => {
 
     const [open, setOpen] = useState(false);
     const loading = open && options.length === 0;
-    const [value, setValue] = useState<Project | null>(null);
+    
 
     useEffect(() => {
         let active = true;
@@ -44,7 +44,7 @@ const Tracker: React.FC<TrackerProps> = ({ options, setOptions }) => {
     const handleClose = () => {
         setOpen(false);
     };
-    console.log(value)
+    
 
     // const selectedValues = React.useMemo(
     //     () => options.filter((v) => v.selected),
