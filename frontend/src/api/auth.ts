@@ -1,13 +1,10 @@
 import instanceAuth from "./axios"
 import { FormLogin, } from "../types"
-import axios from "axios"
-const BD_URL = import.meta.env.VITE_BD_URL
-
-
 
 const endpointLogin = "/auth/login"
 const endpointSignUp = "/auth/register"
 const endpointProjets = "/project"
+const endpointTaskID = "/task/project"
 
 
 // RUTAS PARA INICIAR SESIÓN Y REGISTRARSE
@@ -21,13 +18,14 @@ export const registerRequest = async (data: any) => {
 
 // RUTAS DE PROYECTOS CON CREDENCIAL
 
-export const projectsRequest = async ( ) => {
-    return await axios.get(`${BD_URL}${endpointProjets}`, {
-        withCredentials: true,
-        // xsrfCookieName: cookies,
-        // xsrfHeaderName: "token",
-        })
+export const projectsRequest = async () => {
+    return await instanceAuth.get(endpointProjets)
+}
 
+//  TASK ENDPOINT + WITH COOKIES CREDENTIAL
+
+export const tasksProjectIdRequest = async (project_uuid: string | null) => {
+    return await instanceAuth.get(`${endpointTaskID}/${project_uuid}`)
 }
 
 

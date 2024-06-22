@@ -11,7 +11,7 @@ const Tracker: React.FC<TrackerProps> = ({ options, setOptions, setValue }) => {
 
     const [open, setOpen] = useState(false);
     const loading = open && options.length === 0;
-    
+
 
     useEffect(() => {
         let active = true;
@@ -24,10 +24,8 @@ const Tracker: React.FC<TrackerProps> = ({ options, setOptions, setValue }) => {
 
             const { data } = await projectsRequest()
 
-
             if (active) {
                 setOptions([...data]);
-
             }
         })();
 
@@ -44,13 +42,9 @@ const Tracker: React.FC<TrackerProps> = ({ options, setOptions, setValue }) => {
     const handleClose = () => {
         setOpen(false);
     };
-    
 
-    // const selectedValues = React.useMemo(
-    //     () => options.filter((v) => v.selected),
-    //     [options],
-    //   );
-    
+
+
     return (
         <Autocomplete
             id="select-project"
@@ -62,8 +56,8 @@ const Tracker: React.FC<TrackerProps> = ({ options, setOptions, setValue }) => {
             isOptionEqualToValue={(option, value) => option.uuid === value.uuid}
             getOptionLabel={(option) => option.name}
             onChange={(_event, newValue: Project | null) => {
-                setValue(newValue);
-              }}
+                setValue(newValue)
+            }}
 
             options={options}
             loading={loading}

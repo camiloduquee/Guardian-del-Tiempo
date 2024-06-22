@@ -257,10 +257,7 @@ export async function getAllTasksProjectId(req: Request, res: Response) {
     if (getalltask.length === 0)
       return res.status(404).json({ message: 'No existen tareas disponibles para este proyecto' })
 
-    res.status(200).json({
-      message: 'Se traen todas las tareas correctamente',
-      data: getalltask,
-    })
+    res.status(200).json(getalltask)
   } catch (error) {
     if (error instanceof Error) {
       return res.status(500).json({ message: error.message })

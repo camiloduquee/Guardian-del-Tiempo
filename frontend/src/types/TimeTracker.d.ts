@@ -2,6 +2,9 @@ export interface TrackerProps {
     options: Project[];
     setOptions: React.Dispatch<React.SetStateAction<Project[]>>;
     setValue: function
+    // setTask: function;
+    // id: string | null
+    
 }
 
 // Definiciones de tipos para proyecto
@@ -21,3 +24,20 @@ export interface Project {
     user_uuid: string;
     uuid: string;
 }
+
+// Definición de tareas
+
+export interface Task {
+    custom_label_id: null
+    end_date: string
+    init_date: string
+    is_active: boolean
+    is_completed: boolean
+    label_id: null
+    name: string
+    project_uuid: string
+    status_uuid: string
+    uuid: string
+}
+
+
