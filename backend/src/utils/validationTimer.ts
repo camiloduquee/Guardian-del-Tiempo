@@ -1,4 +1,5 @@
-import { Stopwatch } from "../models/stopwatch.model";
+import { models } from "../database/database";
+import { getModelKeys } from "./validationUser";
 
 // Validate field Requirements.
 const isRequired = (inputValue: any, field: string): string | null => {
@@ -38,7 +39,7 @@ const hasValidateRequirements = (
 };
 
 // User models  keys
-const timerKeys = Object.keys(Stopwatch.getAttributes());
+const timerKeys = getModelKeys('Stopwatch')
 
 // Validate init_date.
 const validateInitDate = (inputValue: any, field: string) => {
@@ -155,7 +156,7 @@ export const validateFields = (body: any) => {
 // Validate field requerid.
 export const validateRequeridFields = (body: any) => {
   const requiredFields = timerKeys.filter(
-    (key) => Stopwatch.getAttributes()[key].allowNull === false
+    (key) => models.Stopwatch.getAttributes()[key].allowNull === false
   );
   for (const field of requiredFields) {
     if (!body[field]) {

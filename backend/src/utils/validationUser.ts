@@ -1,4 +1,6 @@
-import { User } from "../models/users.model";
+
+import { models } from "../database/database";
+
 
 // Validate field Requirements.
 const isRequired = (inputValue: any, field: string): string | null => {
@@ -62,9 +64,33 @@ const formatValue = (inputValue: string): string => {
     .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 };
+// Función para obtener las claves de un modelo
+// backend/src/utils/validationUser.ts
+
+
+// Función para obtener las claves de un modelo
+export const getModelKeys = (modelName: string) => {
+  const Model = models[modelName];
+  if (!Model) {
+    throw new Error(`Model '${modelName}' not found in models`);
+  }
+
+  // Debugging logs
+  console.log(`Model '${modelName}' found in models`);
+
+  // Ensure Model.getAttributes() exists and is a function
+  if (typeof Model.getAttributes !== 'function') {
+    throw new Error(`Model '${modelName}' does not have a getAttributes method`);
+  }
+
+  const attributes = Model.getAttributes();
+  return Object.keys(attributes);
+};
 
 // User models  keys
-const userKeys = Object.keys(User.getAttributes());
+// ejemplo de uso ===> const userKeys = getModelKeys('users');
+const userKeys = getModelKeys('User');
+// console.log(userKeys)
 
 // Validate avatar.
 const validateAvatar = (inputValue: string, field: string): string => {
@@ -350,9 +376,39 @@ export const validateFields = (body: any) => {
 
 // Validate field requerid.
 export const validateRequeridFields = (body: any) => {
+
+  // const requiredFields = userKeys.filter(
+  //   (key) => models.User.getAttributes()[key].allowNull === false
+  // );
+  // for (const field of requiredFields) {
+  //   if (!body[field]) {
+  //     return { message: `El campo ${field} es requerido.` };
+  //   }
+  // }
+  // return true;
+  
+  // Codigo anterior ---------
+
+  // Ensure userKeys is properly defined
+  const userKeys = getModelKeys('User');
+  
+  // Check if models.User exists and has the getAttributes method
+  const User = models.User;
+  
+  if (!User) {
+    throw new Error("User model is not defined");
+  }
+  
+  if (typeof User.getAttributes !== 'function') {
+    throw new Error("User model does not have a getAttributes method");
+  }
+
+  // Filter the required fields
   const requiredFields = userKeys.filter(
     (key) => User.getAttributes()[key].allowNull === false
   );
+
+  // Validate the required fields
   for (const field of requiredFields) {
     if (!body[field]) {
       return { message: `El campo ${field} es requerido.` };
@@ -400,7 +456,7 @@ export const validateRequeridFieldsCustom = (body: any) => {
 
 // Validate Field body
 export const validateFieldBody = (body: any) => {
-  const isValidateBody:any = {
+  const isValidateBody: any = {
     avatar: {
       fn: validateAvatar,
     },
@@ -426,7 +482,7 @@ export const validateFieldBody = (body: any) => {
       fn: validateRole,
     },
   };
-  let resp:any = {};
+  let resp: any = {};
   const bodyKeys = Object.keys(body);
 
   bodyKeys.forEach((key) => {
@@ -444,7 +500,7 @@ export const validateFieldBody = (body: any) => {
     const unequalKeys = bodyKeys.filter(key => resp[key] !== body[key]);
 
     // Crea un nuevo objeto con solo las claves que no son iguales
-    const unequalResp:any = {};
+    const unequalResp: any = {};
     unequalKeys.forEach(key => {
       unequalResp[key] = resp[key];
     });

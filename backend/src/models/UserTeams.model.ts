@@ -1,32 +1,31 @@
-import { DataTypes } from 'sequelize'
-import { sequelize } from '../database/database'
-import { User } from './users.model'
-import { Team } from './teams.model'
+import { DataTypes, Sequelize } from 'sequelize'
 
 const { UUID } = DataTypes
 
-export const UserTeam = sequelize.define(
-  'user_teams',
-  {
-    user_uuid: {
-      type: UUID,
-      allowNull: false,
-      references: {
-        model: User,
-        key: 'uuid',
+export default (sequelize: Sequelize) => {
+  return sequelize.define(
+    'User_team',
+    {
+      user_uuid: {
+        type: UUID,
+        allowNull: false,
+        references: {
+          model: 'users', // User,
+          key: 'uuid',
+        },
+      },
+      team_uuid: {
+        type: UUID,
+        allowNull: false,
+        references: {
+          model: 'teams', // Team,
+          key: 'uuid',
+        },
       },
     },
-    team_uuid: {
-      type: UUID,
-      allowNull: false,
-      references: {
-        model: Team,
-        key: 'uuid',
-      },
-    },
-  },
-  {
-    tableName: 'user_teams',
-    timestamps: false,
-  }
-)
+    {
+      tableName: 'user_teams',
+      timestamps: false,
+    }
+  )
+}

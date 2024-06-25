@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
-import { Role } from "../models/roles.model";
-
+import { models } from "../database/database";
 export class RolesController {
     static async createRoles(req: Request, res: Response) {
         try {
@@ -12,7 +11,7 @@ export class RolesController {
                     .json({ message: "Role name is required" });
             }
 
-            const newRole = await Role.create({ role });
+            const newRole = await models.Role.create({ role });
 
             res.status(201).json(newRole);
         } catch (error) {
@@ -23,7 +22,7 @@ export class RolesController {
 
     static async getRoles(_req: Request, res: Response) {
         try {
-            const roles = await Role.findAll();
+            const roles = await models.Role.findAll();
 
             res.status(200).json(roles);
         } catch (error) {
@@ -40,7 +39,7 @@ export class RolesController {
                 return res.status(400).json({ message: "Role ID is required" });
             }
 
-            const role = await Role.findByPk(id);
+            const role = await models.Role.findByPk(id);
 
             if (!role) {
                 return res.status(404).json({ message: "Role not found" });
@@ -67,7 +66,7 @@ export class RolesController {
                     .json({ message: "Role name is required" });
             }
 
-            const updatedRole = await Role.update(
+            const updatedRole = await models.Role.update(
                 { role },
                 { where: { id }, returning: true }
             );
@@ -95,7 +94,7 @@ export class RolesController {
                 return res.status(400).json({ message: "Role ID is required" });
             }
 
-            const deletedRole = await Role.destroy({ where: { id } });
+            const deletedRole = await models.Role.destroy({ where: { id } });
 
             if (deletedRole === 1)
                 return res.status(200).json({ message: "Deleted role" });

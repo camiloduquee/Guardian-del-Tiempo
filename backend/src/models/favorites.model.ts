@@ -1,32 +1,31 @@
-import { DataTypes } from 'sequelize'
-import { sequelize } from '../database/database'
-import { User } from './users.model'
-import { Project } from './project.model'
+import { DataTypes, Sequelize } from 'sequelize'
 
 const { UUID } = DataTypes
 
-export const Favorite = sequelize.define(
-  'favorites',
-  {
-    user_uuid: {
-      type: UUID,
-      references: {
-        model: User,
-        key: 'uuid',
+export default (sequelize: Sequelize) => {
+  return sequelize.define(
+    'Favorite',
+    {
+      user_uuid: {
+        type: UUID,
+        references: {
+          model: 'users', //User
+          key: 'uuid',
+        },
+        primaryKey: true,
       },
-      primaryKey: true,
-    },
-    project_uuid: {
-      type: UUID,
-      references: {
-        model: Project,
-        key: 'uuid',
+      project_uuid: {
+        type: UUID,
+        references: {
+          model: 'projects',// Project,
+          key: 'uuid',
+        },
+        primaryKey: true,
       },
-      primaryKey: true,
     },
-  },
-  {
-    tableName: 'favorites',
-    timestamps: false,
-  }
-)
+    {
+      tableName: 'favorites',
+      timestamps: false,
+    }
+  )
+}

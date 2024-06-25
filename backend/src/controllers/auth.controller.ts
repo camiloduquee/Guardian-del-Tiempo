@@ -2,7 +2,7 @@ import { compare } from "bcrypt";
 import { Request, Response } from "express";
 import { sign } from "jsonwebtoken";
 import { createUser } from "./user.controller";
-import { User } from "../models/users.model";
+import { models } from "../database/database";
 
 
 import {
@@ -28,7 +28,7 @@ export async function login(req: Request, res: Response) {
     );
     if (!validate) return res.status(400).json({ message: bodyValidate });
     // valida credenciales
-    const userLog: any = await User.findOne({
+    const userLog: any = await models.User.findOne({
       where: { email: body.email },
     });
     if (!userLog) {
@@ -68,7 +68,7 @@ export async function register(req: Request, res: Response) {
     await createUser(req, res);
   } catch (error) {
     return res.status(500).json({
-      message: "El registro de usuario tiene un error interno del Servidor.",
+      message: "El registro de usuario tiene un error interno del Servidor."
     });
   }
 }

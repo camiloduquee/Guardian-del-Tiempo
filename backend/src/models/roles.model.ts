@@ -1,16 +1,17 @@
-import { DataTypes } from 'sequelize'
-import { sequelize } from '../database/database'
+import { DataTypes, Sequelize } from 'sequelize'
 
-export const Role = sequelize.define(
-  'roles',
-  {
-    rol: {
-      type: DataTypes.STRING,
-      allowNull: false,
+export default (sequelize: Sequelize) => {
+  return sequelize.define(
+    'Roles',
+    {
+      rol: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
     },
-  },
-  {
-    tableName: 'roles',
-    timestamps: false,
-  }
-)
+    {
+      tableName: 'roles',
+      timestamps: false,
+    }
+  )
+}

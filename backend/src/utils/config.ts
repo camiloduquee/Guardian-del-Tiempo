@@ -1,6 +1,15 @@
 import 'dotenv/config'
 import pg from "pg"
 import type { DatabaseConfig } from './types'
+import { config } from 'dotenv'
+
+const env = process.env.NODE_ENV || 'development'
+
+if (env === 'development') {
+    config({ path: '.env.development' })
+} else if (env === 'production') {
+    config({ path: '.env.production' })
+}
 
 export const PORT = +(process.env.PORT ?? 3001)
 export const Secret = process.env.JWT_SECRET as string
@@ -19,11 +28,11 @@ export const DATABASE_CONFIG: DatabaseConfig = {
     dialectModule: pg,
 }
 
-export const corsOptions = 
-    { 
-        origin: hostFront, 
-        methods: 'GET, HEAD, PUT,PATCH, POST, DELETE', 
-        credentials: true 
-    };
+export const corsOptions =
+{
+    origin: hostFront,
+    methods: 'GET, HEAD, PUT,PATCH, POST, DELETE',
+    credentials: true
+};
 
 

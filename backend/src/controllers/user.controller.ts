@@ -1,6 +1,6 @@
 import { hash } from "bcrypt";
 import { Request, Response } from "express";
-import { User } from "../models/users.model";
+import { models } from "../database/database";
 import {
   validateFieldBody,
   validateFields,
@@ -15,33 +15,50 @@ interface UserQueryParams {
 export async function createUser(req: Request, res: Response) {
   try {
     const body = req.body;
+
+    // Validación de campos contra el modelo
     const validateBodyInModel = validateFields(body);
-    if (validateBodyInModel !== true)
-      return res.status(400).json(validateBodyInModel);
+      if (validateBodyInModel !== true) return res.status(400).json(validateBodyInModel);
+      
+    // Validación de campos requeridos
     const validateRequeridBody = validateRequeridFields(body);
-    if (validateRequeridBody !== true)
-      return res.status(400).json(validateRequeridBody);
+      if (validateRequeridBody !== true) return res.status(400).json(validateRequeridBody);
+         
+    // Validación de valores de campos
     const bodyValidate = validateFieldBody(body);
     const bodyValidateKeys = Object.keys(bodyValidate);
-    const validate: boolean = bodyValidateKeys.every(
-      (key: string) => bodyValidate[key] === body[key]
-    );
-    if (!validate) return res.status(400).json({ message: bodyValidate });
-    const validateEmail = await User.findOne({ where: { email: body.email } });
-    if (validateEmail !== null) {
-      return res
-        .status(400)
-        .json({ message: "El email ya se encuentra registrado. " });
-    }
+    const validate: boolean = bodyValidateKeys.every((key: string) => bodyValidate[key] === body[key]);
+      if (!validate) return res.status(400).json({ message: bodyValidate });
+
+    // Validación de email duplicado
+    const validateEmail = await models.User.findOne({ where: { email: body.email } });
+    console.log(validateEmail,body.email)
+      if (validateEmail !== null) {
+        return res
+          .status(400)
+          .json({ message: "El email ya se encuentra registrado. " });
+      }
+    
+    // Verificar que el role_id existe
+    const validateRole = await models.Roles.findOne({ where: { id: body.role_id } });
+      if (!validateRole) {
+        return res.status(400).json({ message: "El role no existe." });
+      }
+
+    // Encriptación de contraseña
     const hashedPassword = await hash(body.password, 10);
     body.password = hashedPassword;
+
+    // Generación de UUID para el usuario
     body.uuid = crypto.randomUUID();
-    const newUser = await User.create(body);
-    return res.status(201).json({
-      message: "El usuario ha sido creado con éxito.",
-      data: newUser,
-    });
-  } catch (error) {
+
+    // Creación del nuevo usuario
+    const newUser = await models.User.create(body);
+      return res.status(201).json({
+        message: "El usuario ha sido creado con éxito.",
+        data: newUser,
+      });
+  } catch (error: any) {
     return res
       .status(500)
       .json({ message: "Crear Usuario tiene un error interno del Servidor" });
@@ -53,7 +70,7 @@ export async function getUsers(req: Request, res: Response) {
     const { role_id, email } = req.query as UserQueryParams;
 
     if (!role_id && !email) {
-      const findUsers = await User.findAll();
+      const findUsers = await models.User.findAll();
       return res.status(200).json({
         message: "Lista de usuarios realizada con éxito.",
         data: findUsers,
@@ -70,7 +87,7 @@ export async function getUsers(req: Request, res: Response) {
       whereClause.email = email;
     }
 
-    const users = await User.findAll({
+    const users = await models.User.findAll({
       where: whereClause,
     });
 
@@ -95,7 +112,7 @@ export async function getUserById(req: Request, res: Response) {
   try {
     const id = req.params.id;
     if (!id) return res.status(400).json({ message: "El id es requerido." });
-    const findUserById = await User.findByPk(id);
+    const findUserById = await models.User.findByPk(id);
     if (findUserById == null) {
       return res.status(404).json({ message: "Usuario no encontrado." });
     }
@@ -124,11 +141,11 @@ export async function updateUser(req: Request, res: Response) {
       (key: string) => bodyValidate[key] === body[key]
     );
     if (!validate) return res.status(400).json({ message: bodyValidate });
-    const [updated] = await User.update(body, {
+    const [updated] = await models.User.update(body, {
       where: { uuid: id },
     });
     if (updated) {
-      const updatedUser = await User.findByPk(id);
+      const updatedUser = await models.User.findByPk(id);
       if (updatedUser == null) {
         return res
           .status(404)
@@ -152,7 +169,7 @@ export async function deleteUser(req: Request, res: Response) {
   try {
     const id = req.params.id;
     if (!id) return res.status(400).json({ message: "El id es requerido." });
-    const deletedUser = await User.destroy({ where: { uuid: id } });
+    const deletedUser = await models.User.destroy({ where: { uuid: id } });
     if (deletedUser === 1) {
       return res
         .status(200)

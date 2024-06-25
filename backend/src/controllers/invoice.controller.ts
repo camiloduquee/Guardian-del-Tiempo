@@ -1,7 +1,12 @@
 import { Request, Response } from 'express';
-import { Invoice } from '../models/invoice.model';
+import { models } from "../database/database";
+import { getModelKeys } from '../utils/validationUser';
 
-const invoiceKey = Object.keys(Invoice.getAttributes());
+// Obtener las claves del modelo de Invoice
+
+const invoiceKey = getModelKeys('Invoice');
+
+// Función para validar campos requeridos
 const validateFields = (body: any) => {
   const bodyKey = Object.keys(body);
   // No este vació el Cuerpo de la petición
@@ -16,12 +21,13 @@ const validateFields = (body: any) => {
       };
     }
   }
-  return true;
-};
+return true;
+}
+
 const validateRequeridFields = (body: any) => {
   const requiredFields = invoiceKey.filter(
-    (key) => Invoice.getAttributes()[key].allowNull === false
-  )
+    (key) => !models.Invoice.getModelKeys()[key].allowNull
+  );
   for (const field of requiredFields) {
     if (!body[field]) {
       return { message: `El campo ${field} es requerido.` }
@@ -39,7 +45,7 @@ export async function createInvoice(req: Request, res: Response) {
   const validateRequeridBody = validateRequeridFields(body)
   if (validateRequeridBody !== true) return res.status(400).json({message: ' los campos son requeridos',  validateRequeridBody});
 
-    const newinvoice = await Invoice.create(body);
+    const newinvoice = await models.Invoice.create(body);
     return res.status(201).json({ message: 'Factura creada correctamente', newinvoice });
   } catch (error) {
     if (error instanceof Error) {
@@ -50,7 +56,7 @@ export async function createInvoice(req: Request, res: Response) {
 }
 export async function getAllInvoices(_req: Request, res: Response) {
   try {
-    const getInvoices = await Invoice.findAll();
+    const getInvoices = await models.Invoice.findAll();
     if (getInvoices.length === 0 ) return res.status(401).json({message:'no existen facturas disponibles'});
     if (!getInvoices) {
       throw new Error('No se pudieron traer todas las facturas');
@@ -72,7 +78,7 @@ export async function getInvoiceById(req: Request, res: Response) {
     if(!id) return res.status(400).json({
       message: 'el id es requerido',
     });
-    const invoice = await Invoice.findByPk(req.params.id);
+    const invoice = await models.Invoice.findByPk(req.params.id);
     if (!invoice) return res.status(404).json({ message: 'Factura no encontrada' });
     res.status(200).json({ message: 'Factura encontrada con exito', data: invoice });
   } catch (error) {
@@ -90,7 +96,7 @@ export async function updateInvoice(req: Request, res: Response) {
     const body = req.body
     const validate = validateFields(body);
     if (validate !== true) return res.status(400).json({message: 'falta un dato en el cuerpo de la peticion', validate});
-    const invoice = await Invoice.findByPk(req.params.uuid)
+    const invoice = await models.Invoice.findByPk(req.params.uuid)
     if (!invoice) return res.status(401).json({ message: 'error al traer la factura, factura no valida' })
     const updateInvoice = await invoice.update(req.body)
     return res.status(201).json({ message: 'la factura ha sido actualizada correctamente', updateInvoice })
@@ -104,7 +110,7 @@ export async function updateInvoice(req: Request, res: Response) {
 }
 export async function deleteInvoice(req: Request, res: Response) {
   try {
-    const invoice = await Invoice.findByPk(req.params.uuid);
+    const invoice = await models.Invoice.findByPk(req.params.uuid);
     if (!invoice) return res.status(401).json({ message: 'error al traer la factura, factura no valida' })    
     const deleteinvoice = await invoice.destroy(req.body)
     return res.status(200).json({message: 'La factura fue eliminada correctamente', deleteinvoice});

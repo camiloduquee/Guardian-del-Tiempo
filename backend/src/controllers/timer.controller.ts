@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { Stopwatch } from "../models/stopwatch.model";
 import {
   validateFieldBody,
   validateFields,
   validateRequeridFields,
 } from "../utils/validationTimer";
+import { models } from "../database/database";
 
 export async function createTimer(req: Request, res: Response) {
   try {
@@ -21,7 +21,7 @@ export async function createTimer(req: Request, res: Response) {
       (key: string) => bodyValidate[key] === body[key]
     );
     if (!validate) return res.status(400).json({ message: bodyValidate });
-    const newTimer = await Stopwatch.create(body);
+    const newTimer = await models.Stopwatch.create(body);
     res.status(201).json({
       message: "El cronometro ha sido creado con éxito.",
       data: newTimer,
@@ -36,7 +36,7 @@ export async function createTimer(req: Request, res: Response) {
 
 export async function getTimers(_req: Request, res: Response) {
   try {
-    const timers = await Stopwatch.findAll();
+    const timers = await models.Stopwatch.findAll();
     res.status(200).json({
       message: "La lista de cronómetros ha sido realizad con éxito.",
       data: timers
@@ -52,7 +52,7 @@ export async function getTimerById(req: Request, res: Response) {
   try {
     const { id } = req.params;
     if (!id) return res.status(400).json({ message: "El id es requerido." });
-    const timer = await Stopwatch.findByPk(id);
+    const timer = await models.Stopwatch.findByPk(id);
     if (!timer) {
       return res.status(404).json({ message: "El cronometro no existe" });
     }
@@ -85,11 +85,11 @@ export async function updateTimer(req: Request, res: Response) {
       (key: string) => bodyValidate[key] === body[key]
     );
     if (!validate) return res.status(400).json({ message: bodyValidate });
-    const [updated] = await Stopwatch.update(body, {
+    const [updated] = await models.Stopwatch.update(body, {
       where: { uuid: id },
     });
     if (updated) {
-      const updatedUser = await Stopwatch.findByPk(id);
+      const updatedUser = await models.Stopwatch.findByPk(id);
       if (updatedUser == null) {
         return res
           .status(404)
@@ -115,7 +115,7 @@ export async function deleteTimer(req: Request, res: Response) {
   try {
     const { id } = req.params;
     if (!id) return res.status(400).json({ message: "El id es requerido." });
-    const deletedRole = await Stopwatch.destroy({ where: { id } });
+    const deletedRole = await models.Stopwatch.destroy({ where: { id } });
     if (deletedRole === 1)
       return res.status(200).json({ message: "El cronometro fue eliminado con éxito." });
     return res

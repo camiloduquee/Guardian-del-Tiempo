@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import { Status } from "../models/status.model";
+import { models } from "../database/database";
 
 export class StatusesController {
     static async createStatus(req: Request, res: Response) {
         try {
             const { color, name } = req.body;
 
-            const newLabel = await Status.create({ color, name });
+            const newLabel = await models.Status.create({ color, name });
 
             res.status(201).json(newLabel);
         } catch (error) {
@@ -17,7 +17,7 @@ export class StatusesController {
 
     static async getStatuses(_req: Request, res: Response) {
         try {
-            const labels = await Status.findAll();
+            const labels = await models.Status.findAll();
 
             res.status(200).json(labels);
         } catch (error) {
@@ -36,7 +36,7 @@ export class StatusesController {
                     .json({ message: "Label ID is required" });
             }
 
-            const label = await Status.findByPk(id);
+            const label = await models.Status.findByPk(id);
 
             if (!label) {
                 return res.status(404).json({ message: "Label not found" });
@@ -59,7 +59,7 @@ export class StatusesController {
                     .json({ message: "Label ID is required" });
             }
 
-            const updatedRole = await Status.update(
+            const updatedRole = await models.Status.update(
                 { color, name },
                 { where: { id }, returning: true }
             );
@@ -89,7 +89,7 @@ export class StatusesController {
                     .json({ message: "Label ID is required" });
             }
 
-            const deletedRole = await Status.destroy({ where: { id } });
+            const deletedRole = await models.Status.destroy({ where: { id } });
 
             if (deletedRole === 1)
                 return res.status(200).json({ message: "Deleted label" });

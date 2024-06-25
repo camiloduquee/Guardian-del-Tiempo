@@ -1,8 +1,12 @@
 import { Request, Response } from 'express'
-import { Task } from '../models/tasks.model'
 import { Op } from 'sequelize'
+import { models } from "../database/database";
+import { getModelKeys } from '../utils/validationUser';
 
-const taskKey = Object.keys(Task.getAttributes())
+// Obtener las claves del modelo de Invoice
+
+const taskKey = getModelKeys('Task');
+
 const validateFields = (body: any) => {
   const bodyKey = Object.keys(body)
   // No este vació el Cuerpo de la petición
@@ -21,7 +25,7 @@ const validateFields = (body: any) => {
 }
 const validateRequeridFields = (body: any) => {
   const requiredFields = taskKey.filter(
-    (key) => Task.getAttributes()[key].allowNull === false
+    (key) => models.Task.getAttributes()[key].allowNull === false
   )
   for (const field of requiredFields) {
     if (!body[field]) {
@@ -55,7 +59,7 @@ export async function createTask(req: Request, res: Response) {
     body.isactive = true
     body.status_uuid = 'cb01e587-9501-4370-9fd0-d2ab7b3e07d3'
 
-    const newtask = await Task.create(body)
+    const newtask = await models.Task.create(body)
     return res
       .status(201)
       .json({ message: 'tarea creada exitosamente', newtask })
@@ -73,7 +77,7 @@ export async function createTask(req: Request, res: Response) {
 }
 export async function getAllTasks(_req: Request, res: Response) {
   try {
-    const getalltask = await Task.findAll()
+    const getalltask = await models.Task.findAll()
     if (getalltask.length === 0)
       return res.status(404).json({ message: 'no existen tareas disponibles' })
 
@@ -98,7 +102,7 @@ export async function getTaskById(req: Request, res: Response) {
       return res.status(400).json({
         message: 'el id es requerido',
       })
-    const getByIdtask = await Task.findByPk(req.params.id)
+    const getByIdtask = await models.Task.findByPk(req.params.id)
     if (getByIdtask == null)
       return res
         .status(404)
@@ -124,7 +128,7 @@ export async function getTaskById(req: Request, res: Response) {
 export async function searchTasks(req: Request, res: Response) {
   try {
     const { name } = req.query
-    const searchtask = await Task.findAll({
+    const searchtask = await models.Task.findAll({
       where: {
         name: {
           [Op.like]: `%${name}%`,
@@ -221,7 +225,7 @@ export async function deleteTask(req: Request, res: Response) {
           message: 'falta un dato en el cuerpo de la peticion',
           validate,
         })
-    // const task = await Task.findByPk(req.params.id);
+    // const task = await models.Task.findByPk(req.params.id);
     if (!task)
       return res.status(404).json({ message: 'la tarea no existe', task })
     const deletedTask = await task.destroy(req.body)
@@ -252,7 +256,7 @@ export async function getAllTasksProjectId(req: Request, res: Response) {
     if (!project_uuid) 
       return res.status(400).json({ message: 'El ID del proyecto es requerido' })
 
-    const getalltask = await Task.findAll({ where: { project_uuid } })
+    const getalltask = await models.Task.findAll({ where: { project_uuid } })
     
     if (getalltask.length === 0)
       return res.status(404).json({ message: 'No existen tareas disponibles para este proyecto' })

@@ -17,3 +17,8 @@
     #    -> pnpm run frontend
     #    -> pnpm run backend
 
+
+
+Manejo de base de datos en local: crear tabla de roles: ejecutar una Query
+
+INSERT INTO roles (id,rol) VALUES (1, 'Freelance'), (2, 'Client');
