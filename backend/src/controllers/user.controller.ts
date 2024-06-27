@@ -18,32 +18,32 @@ export async function createUser(req: Request, res: Response) {
 
     // Validación de campos contra el modelo
     const validateBodyInModel = validateFields(body);
-      if (validateBodyInModel !== true) return res.status(400).json(validateBodyInModel);
-      
+    if (validateBodyInModel !== true) return res.status(400).json(validateBodyInModel);
+
     // Validación de campos requeridos
     const validateRequeridBody = validateRequeridFields(body);
-      if (validateRequeridBody !== true) return res.status(400).json(validateRequeridBody);
-         
+    if (validateRequeridBody !== true) return res.status(400).json(validateRequeridBody);
+
     // Validación de valores de campos
     const bodyValidate = validateFieldBody(body);
     const bodyValidateKeys = Object.keys(bodyValidate);
     const validate: boolean = bodyValidateKeys.every((key: string) => bodyValidate[key] === body[key]);
-      if (!validate) return res.status(400).json({ message: bodyValidate });
+    if (!validate) return res.status(400).json({ message: bodyValidate });
 
     // Validación de email duplicado
     const validateEmail = await models.User.findOne({ where: { email: body.email } });
-    console.log(validateEmail,body.email)
-      if (validateEmail !== null) {
-        return res
-          .status(400)
-          .json({ message: "El email ya se encuentra registrado. " });
-      }
-    
+    console.log(validateEmail, body.email)
+    if (validateEmail !== null) {
+      return res
+        .status(400)
+        .json({ message: "El email ya se encuentra registrado. " });
+    }
+
     // Verificar que el role_id existe
     const validateRole = await models.Roles.findOne({ where: { id: body.role_id } });
-      if (!validateRole) {
-        return res.status(400).json({ message: "El role no existe." });
-      }
+    if (!validateRole) {
+      return res.status(400).json({ message: "El role no existe." });
+    }
 
     // Encriptación de contraseña
     const hashedPassword = await hash(body.password, 10);
@@ -53,11 +53,14 @@ export async function createUser(req: Request, res: Response) {
     body.uuid = crypto.randomUUID();
 
     // Creación del nuevo usuario
-    const newUser = await models.User.create(body);
-      return res.status(201).json({
-        message: "El usuario ha sido creado con éxito.",
-        data: newUser,
-      });
+    const newUser = await models.User.create({
+      ...body,
+      include: [{ model: models.Roles, as: 'roles' }]
+    });
+    return res.status(201).json({
+      message: "El usuario ha sido creado con éxito.",
+      data: newUser,
+    });
   } catch (error: any) {
     return res
       .status(500)

@@ -33,10 +33,20 @@ modelFiles.forEach((file) => {
 });
 
 // Ejecutar las asociaciones entre los modelos si existen
-Object.keys(models).forEach((modelName) => {
-  if (models[modelName].associate) {
-      models[modelName].associate(models);
-  }
-});
+// Object.keys(models).forEach((modelName) => {
+//   if (models[modelName].associate) {
+//       models[modelName].associate(models);
+//   }
+// });
+
+// Definir asociaciones 
+
+const {User, Roles, Team} = sequelize.models
+
+User.belongsToMany(Roles, { through: 'UserRoles', foreignKey: 'user_uuid', as: 'roles' });
+Roles.belongsToMany(User, { through: 'UserRoles', foreignKey: 'role_uuid', as: 'users' });
+
+
+
 
 export { sequelize, models };

@@ -1,4 +1,5 @@
 import { DataTypes, Sequelize } from 'sequelize'
+import { models } from '../database/database'
 
 const { UUID, UUIDV4, DECIMAL } = DataTypes
 

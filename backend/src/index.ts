@@ -1,5 +1,7 @@
 import app from './app'
 import { sequelize, models } from './database/database'
+import initializeRoles from './seeders/initializeRoles'
+import initializeStatus from './seeders/initializeStatus'
 import { PORT } from './utils/config'
 import dotenv from 'dotenv'
 
@@ -17,11 +19,11 @@ async function validateConnection() {
       if (process.env.NODE_ENV === 'development') {
         await sequelize.sync({ force: true })
 
-        // Inicializo la tabla de roles
-        await models.Roles.bulkCreate([
-          {  rol: 'Freelance' },
-          {  rol: 'Client' },
-        ]);
+        // Inicializo la tabla de Roles
+        await initializeRoles()
+
+        // Inicializo la tabla de Status
+        await initializeStatus()
 
         console.log('Base de datos sincronizada y tablas recreadas en desarrollo')
       } else {
